@@ -13,7 +13,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
 import model.SecurityManager;
-import pojo.User;
+import model.User;
  
 @Path("/user")
 public class UserService {

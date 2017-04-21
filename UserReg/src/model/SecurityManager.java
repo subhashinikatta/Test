@@ -3,10 +3,10 @@ package model;
 import java.sql.Connection;
 import java.util.ArrayList;
  
-import pojo.User;
+import model.User;
  
 import dbconnection.DbConnection;
-import dbconnection.UserHandler;;
+import model.UserHandler;;
 
  
 public class SecurityManager {
