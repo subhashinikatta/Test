@@ -1,22 +1,22 @@
-package web;
+package model;
 
 import java.sql.Connection;
 import java.util.ArrayList;
  
-import web.UserVO;
+import pojo.User;
  
-import web.DbConnection;
- 
-import web.LoginHandler;
+import dbconnection.DbConnection;
+import dbconnection.UserHandler;;
+
  
 public class SecurityManager {
  
-public ArrayList<UserVO> getAllUsersList()throws Exception {
-ArrayList<UserVO> userList = null;
+public ArrayList<User> getAllUsersList()throws Exception {
+ArrayList<User> userList = null;
 try {
 DbConnection database= new DbConnection();
 Connection connection = database.getConnection();
-LoginHandler loginHandler= new LoginHandler();
+UserHandler loginHandler= new UserHandler();
 userList= loginHandler.getAllUsers(connection);
  
 } catch (Exception e) {

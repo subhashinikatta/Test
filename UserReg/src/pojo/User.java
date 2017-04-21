@@ -1,6 +1,6 @@
-package web;
+package pojo;
 
-public class UserVO {
+public class User {
 
 private String FirstName;
 private String LastName;

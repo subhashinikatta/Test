@@ -1,27 +1,59 @@
-package web;
+package webservices;
 
-import java.awt.PageAttributes.MediaType;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.MediaType;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import web.UserVO;
+import model.SecurityManager;
+import pojo.User;
  
-@Path("/register")
-public class RegService
-{
+@Path("/user")
+public class UserService {
+ 
 @POST
-@Path("/doregister")
+ @Path("/login")
+ @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+ public String login(@FormParam("username") String username,
+ @FormParam("password") String password) {
+ 
+return getAllUsersList(username, password);
+ 
+}
+ 
+public String getAllUsersList(String username,String password)
+ {
+ String userListData = null;
+ try 
+ {
+ ArrayList<User> userList = null;
+ SecurityManager securityManager= new SecurityManager();
+ userList = securityManager.getAllUsersList();
+ for (User userVO : userList) {
+ if(userVO.getUsername().equals(username))
+ {
+ if(userVO.getPassword().equals(password))
+ {
+ return "Logged in User:"+username;
+ }
+ }
+ }
+ 
+} catch (Exception e)
+ {
+ System.out.println("error");
+ }
+ return "You are not a Valid User";
+ }
+@POST
+@Path("/register")
 public String register(@FormParam("FirstName") String FirstName,@FormParam("LastName") String LastName,@FormParam("Email") String Email,
         @FormParam("username") String username, @FormParam("password") String password, @FormParam("confirmpassword") String confirmpassword){
 	
@@ -40,10 +72,10 @@ public String register(@FormParam("FirstName") String FirstName,@FormParam("Last
         ps.setString(6, confirmpassword);
         int i = ps.executeUpdate();
 
-	ArrayList<UserVO> userList = new ArrayList<UserVO>();
+	ArrayList<User> userList = new ArrayList<User>();
 	SecurityManager securityManager= new SecurityManager();
 	 userList = securityManager.getAllUsersList();
-	 for (UserVO userVO : userList){
+	 for (User userVO : userList){
 if(FirstName.equals(null)||FirstName==""||LastName.equals(null)||LastName==""||Email.equals(null)||Email==""||username.equals(null)||username==""||password.equals(null)||password==""||confirmpassword.equals(null)||confirmpassword=="")
  {
 			

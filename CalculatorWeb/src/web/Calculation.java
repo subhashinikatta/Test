@@ -2,21 +2,18 @@ package web;
 
 public class Calculation {
 public static int sum(int a, int b){
-	int sum = a +  b;
-	System.out.println("Sum " + sum);
 	return a+b;
 }
-public static int sub(int a, int b){
-int sub = a - b;
-	System.out.println("Sub " + sub);
+public static int subtraction(int a, int b){
+
 	return a-b;
 }
-public static int mul(int a, int b){
+public static int multiplication(int a, int b){
 int mul = a * b;
 	System.out.println("Mul " + mul);
 	return a*b;
 }
-public static int div(int a, int b){
+public static int division(int a, int b){
 int div = a/b;
 	System.out.println("Div " + div);
 	return a/b;

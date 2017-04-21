@@ -45,7 +45,7 @@ button:hover {
     </head>
     <body style="align:center">
     <center>
-        <form action="rest/login/dologin" method="post" >
+        <form action="rest/user/login" method="post" >
         <fieldset style="width: 300px">
             <legend> Login to App </legend>
         

@@ -32,7 +32,7 @@ span.req {
 </style>
 </head>
 <body >
- <form action="rest/register/doregister" method="post" >
+ <form action="rest/user/register" method="post" >
 <center>
 <div class="container">
 	<div class="row">

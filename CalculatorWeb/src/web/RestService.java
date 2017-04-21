@@ -6,7 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
  
-@Path("/customers")
+@Path("/arithmatic operations")
 public class RestService {
     
     @POST
@@ -42,7 +42,7 @@ public class RestService {
     public Response getResultByPassingValue1(
                     @FormParam("nameKey") int a,
                     @FormParam("countryKey") int b) {
-        int result = Calculation.sub(a, b);
+        int result = Calculation.subtraction(a, b);
         System.out.println("Result "+result);
         String output = "<font face='verdana' size='2'>" +
                 "Web Service has added your Customer information with Name "+result+"</u></font>";
@@ -57,7 +57,7 @@ public class RestService {
    public Response getResultByPassingValue2(
                    @FormParam("nameKey") int a,
                    @FormParam("countryKey") int b) {
-       int result = Calculation.mul(a, b);
+       int result = Calculation.multiplication(a, b);
        System.out.println("Result "+result);
        String output = "<font face='verdana' size='2'>" +
                "Web Service has added your Customer information with Name "+result+"</u></font>";
@@ -72,7 +72,7 @@ public class RestService {
    public Response getResultByPassingValue3(
                    @FormParam("nameKey") int a,
                    @FormParam("countryKey") int b) {
-       int result = Calculation.div(a, b);
+       int result = Calculation.division(a, b);
        System.out.println("Result "+result);
        String output = "<font face='verdana' size='2'>" +
                "Web Service has added your Customer information with Name "+result+"</u></font>";
