@@ -9,15 +9,11 @@ private String username;
 private String password;
 private String confirmpassword;
 
-public String getUsername() {
-return username;
-}
+
 public void setusername(String username) {
 this.username = username;
 }
-public String getPassword() {
-return password;
-}
+
 public void setpassword(String password) {
 this.password = password;
 }
@@ -37,5 +33,32 @@ public void setconfirmpassword(String string) {
 	// TODO Auto-generated method stub
 	
 }
+public String getFirstName() {
+	// TODO Auto-generated method stub
+	return null;
+}
+public String getLastName() {
+	// TODO Auto-generated method stub
+	return null;
+}
+public String getEmail() {
+	// TODO Auto-generated method stub
+	return null;
+}
+public String getusername() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public String getpassword() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public String getconfirmpassword() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
  
 }

@@ -60,6 +60,8 @@ button:hover {
     <button type="submit">Login</button>
     <button type="reset">Reset</button><br>
    <span>Yet Not registered!! <a href="reg1.jsp">Register Here</a></span>
+   <span>Yet Not registered!! <a href="update.jsp">Update Here</a></span>
+    <span>Yet Not registered!! <a href="delete.jsp">Delete Here</a></span>
   </div>
 </fieldset>
         </form>

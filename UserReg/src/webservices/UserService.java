@@ -1,11 +1,14 @@
 package webservices;
 
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
@@ -37,9 +40,9 @@ public String getAllUsersList(String username,String password)
  SecurityManager securityManager= new SecurityManager();
  userList = securityManager.getAllUsersList();
  for (User userVO : userList) {
- if(userVO.getUsername().equals(username))
+ if(userVO.getusername().equals(username))
  {
- if(userVO.getPassword().equals(password))
+ if(userVO.getpassword().equals(password))
  {
  return "Logged in User:"+username;
  }
@@ -87,6 +90,67 @@ if(FirstName.equals(null)||FirstName==""||LastName.equals(null)||LastName==""||E
 e.printStackTrace();
 }
 return "Successfully added user details";
+
+}
+@PUT
+@Path("/update")
+public String update(@FormParam("FirstName") String FirstName,@FormParam("LastName") String LastName,@FormParam("Email") String Email,
+        @FormParam("username") String username, @FormParam("password") String password, @FormParam("confirmpassword") String confirmpassword){
+	
+	try {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb", "subbu", "subbu123");
+
+		PreparedStatement ps = (PreparedStatement) connection
+                .prepareStatement("update Employee set LastName=?,Email=?,username=?,password=?,confirmpassword=? where FirstName=?");
+
+        ps.setString(1, LastName);
+        ps.setString(2, Email);
+        ps.setString(3, username);
+        ps.setString(4, password);
+        ps.setString(5, confirmpassword);
+        ps.setString(6, FirstName);
+        int i = ps.executeUpdate();
+
+	ArrayList<User> userList = new ArrayList<User>();
+	SecurityManager securityManager= new SecurityManager();
+	 userList = securityManager.getAllUsersList();
+	
+ 
+	 
+} catch (Exception e)
+{
+e.printStackTrace();
+}
+return "Successfully updated user details";
+
+}
+@DELETE
+@Path("/delete")
+public String deleet(@FormParam("FirstName") String FirstName,@FormParam("LastName") String LastName,@FormParam("Email") String Email,
+        @FormParam("username") String username, @FormParam("password") String password, @FormParam("confirmpassword") String confirmpassword){
+	
+	try {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb", "subbu", "subbu123");
+
+		PreparedStatement ps = (PreparedStatement) connection
+                .prepareStatement("delete from Employee where FirstName=?");
+
+        ps.setString(1, FirstName);
+        int i = ps.executeUpdate();
+
+	ArrayList<User> userList = new ArrayList<User>();
+	SecurityManager securityManager= new SecurityManager();
+	 userList = securityManager.getAllUsersList();
+	
+ 
+	 
+} catch (Exception e)
+{
+e.printStackTrace();
+}
+return "Successfully deleted user details";
 
 }
 }
