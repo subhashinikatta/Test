@@ -9,6 +9,14 @@ private String username;
 private String password;
 private String confirmpassword;
 
+public User(String FirstName,String LastName,String Email,String username,String password,String confirmpassword) {
+    this.username = username; 
+    this.password = password;
+    this.confirmpassword = confirmpassword;
+    this.FirstName=FirstName;
+    this.LastName=LastName;
+    this.Email=Email;
+    }
 
 public void setusername(String username) {
 this.username = username;

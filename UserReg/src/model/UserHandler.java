@@ -33,6 +33,7 @@ throw e;
 public ArrayList<User> getAllUsers1(Connection connection) throws SQLException
 {
 ArrayList<User> userList = new ArrayList<User> ();
+
 PreparedStatement stmt = connection.prepareStatement("insert into Employee(FirstName,LastName,Emali,username,password,confirmpassword) values(?,?,?,?,?.?)");
 ResultSet rs = stmt.executeQuery();
 try

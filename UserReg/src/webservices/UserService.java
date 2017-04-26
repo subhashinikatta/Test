@@ -3,6 +3,7 @@ package webservices;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import dao.UserDAOImplementation;
 import model.SecurityManager;
 import model.User;
  
@@ -27,130 +29,150 @@ public class UserService {
  public String login(@FormParam("username") String username,
  @FormParam("password") String password) {
  
-return getAllUsersList(username, password);
- 
-}
- 
-public String getAllUsersList(String username,String password)
- {
- String userListData = null;
- try 
- {
- ArrayList<User> userList = null;
- SecurityManager securityManager= new SecurityManager();
- userList = securityManager.getAllUsersList();
- for (User userVO : userList) {
- if(userVO.getusername().equals(username))
- {
- if(userVO.getpassword().equals(password))
- {
- return "Logged in User:"+username;
- }
- }
- }
- 
-} catch (Exception e)
- {
- System.out.println("error");
- }
- return "You are not a Valid User";
- }
+	return getAllUsersList(username, password);
+	 
+	}
+	 
+	public String getAllUsersList(String username,String password)
+	 {
+	 String userListData = null;
+	 try 
+	 {
+	 ArrayList<User> userList = null;
+	 SecurityManager securityManager= new SecurityManager();
+	 userList = securityManager.getAllUsersList();
+	 for (User user : userList) {
+	 if(user.getusername().equals(username))
+	 {
+	 if(user.getpassword().equals(password))
+	 {
+	 return "Logged in User:"+username;
+	 }
+	 }
+	 }
+	 
+	} catch (Exception e)
+	 {
+	 System.out.println("error");
+	 }
+	 return "You are not a Valid User";
+	 }
 @POST
 @Path("/register")
 public String register(@FormParam("FirstName") String FirstName,@FormParam("LastName") String LastName,@FormParam("Email") String Email,
         @FormParam("username") String username, @FormParam("password") String password, @FormParam("confirmpassword") String confirmpassword){
 	
-	try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb", "subbu", "subbu123");
-
-		PreparedStatement ps = (PreparedStatement) connection
-                .prepareStatement("insert into Employee values(?,?,?,?,?,?)");
-
-        ps.setString(1, FirstName);
-        ps.setString(2, LastName );
-        ps.setString(3, Email);
-        ps.setString(4, username);
-        ps.setString(5, password);
-        ps.setString(6, confirmpassword);
-        int i = ps.executeUpdate();
-
-	ArrayList<User> userList = new ArrayList<User>();
-	SecurityManager securityManager= new SecurityManager();
-	 userList = securityManager.getAllUsersList();
-	 for (User userVO : userList){
-if(FirstName.equals(null)||FirstName==""||LastName.equals(null)||LastName==""||Email.equals(null)||Email==""||username.equals(null)||username==""||password.equals(null)||password==""||confirmpassword.equals(null)||confirmpassword=="")
+	 User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
+     int result = UserDAOImplementation.addUser(user);
+     String users=null;
+     try
  {
-			
-			return "Successfully added user details";
- }
-	 }
-} catch (Exception e)
+	 
+	 ArrayList<User> userList = null;
+	 SecurityManager securityManager= new SecurityManager();
+	 userList = securityManager.getAllUsersList();
+	 Gson gson =new Gson();
+	 users =gson.toJson(userList);
+	 for (User user1 : userList) {
+		 String EMAIL_PATTERN = 
+				 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+				 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+if( user1.getEmail() == null || user1.getEmail().trim().equals("")&& !pattern.matcher(Email).matches()&& user1.getusername() == null || user1.getusername().trim().equals("")&& user1.getFirstName() == null || user1.getFirstName().trim().equals("")&& user1.getLastName() == null || user1.getLastName().trim().equals(""))
 {
-e.printStackTrace();
+					  
+						  System.out.println("please enter valid details");
+					  }
+else{
+	userList.add(user1);
 }
-return "Successfully added user details";
-
+	 }
+	 }
+	 catch (Exception e)
+	 {
+	 System.out.println("error");
+	 }
+	 
+     return users;
 }
 @PUT
 @Path("/update")
 public String update(@FormParam("FirstName") String FirstName,@FormParam("LastName") String LastName,@FormParam("Email") String Email,
         @FormParam("username") String username, @FormParam("password") String password, @FormParam("confirmpassword") String confirmpassword){
-	
-	try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb", "subbu", "subbu123");
-
-		PreparedStatement ps = (PreparedStatement) connection
-                .prepareStatement("update Employee set LastName=?,Email=?,username=?,password=?,confirmpassword=? where FirstName=?");
-
-        ps.setString(1, LastName);
-        ps.setString(2, Email);
-        ps.setString(3, username);
-        ps.setString(4, password);
-        ps.setString(5, confirmpassword);
-        ps.setString(6, FirstName);
-        int i = ps.executeUpdate();
-
-	ArrayList<User> userList = new ArrayList<User>();
-	SecurityManager securityManager= new SecurityManager();
+	 User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
+     int result = UserDAOImplementation.updateUser(user);
+	 try 
+	 {
+	 ArrayList<User> userList = null;
+	 SecurityManager securityManager= new SecurityManager();
 	 userList = securityManager.getAllUsersList();
-	
- 
-	 
-} catch (Exception e)
+	 for (User user2 : userList) {
+		 String EMAIL_PATTERN = 
+				 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+				 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+if( user2.getEmail() == null || user2.getEmail().trim().equals("")&& !pattern.matcher(Email).matches())
 {
-e.printStackTrace();
+	System.out.println("please enter valid email");
+		 
 }
-return "Successfully updated user details";
+else{
+	if(user.getEmail().equals(Email))	{			  
+		userList.add(user2);
+	  }
+	
 
+}
+	 }
+	 }
+	 catch (Exception e)
+	 {
+	 System.out.println("error");
+	 }
+	 
+     if(result == 1){
+        return "SUCCESSFULLY UPDATED";
+     }
+     return "YOUR EMAIL IS NOT REGISTERED";
 }
 @DELETE
 @Path("/delete")
 public String deleet(@FormParam("FirstName") String FirstName,@FormParam("LastName") String LastName,@FormParam("Email") String Email,
         @FormParam("username") String username, @FormParam("password") String password, @FormParam("confirmpassword") String confirmpassword){
-	
-	try {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/userdb", "subbu", "subbu123");
-
-		PreparedStatement ps = (PreparedStatement) connection
-                .prepareStatement("delete from Employee where FirstName=?");
-
-        ps.setString(1, FirstName);
-        int i = ps.executeUpdate();
-
-	ArrayList<User> userList = new ArrayList<User>();
-	SecurityManager securityManager= new SecurityManager();
+	User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
+    int result = UserDAOImplementation.deleetUser(user);
+	 try 
+	 {
+	 ArrayList<User> userList = null;
+	 SecurityManager securityManager= new SecurityManager();
 	 userList = securityManager.getAllUsersList();
-	
- 
-	 
-} catch (Exception e)
+	 for (User user3 : userList) {
+		 String EMAIL_PATTERN = 
+				 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+				 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+if( user3.getEmail() == null || user3.getEmail().trim().equals("")&& !pattern.matcher(Email).matches())
 {
-e.printStackTrace();
+	System.out.println("please enter valid email");
+		 
 }
-return "Successfully deleted user details";
+else{
+	if(user.getEmail().equals(Email))	{			  
+		userList.add(user3);
+	  }
+	
 
+}
+	 }
+	 }
+	 catch (Exception e)
+	 {
+	 System.out.println("error");
+	 }
+	 
+     if(result == 1){
+        return "SUCCESSFULLY DELETED";
+     }
+     return "YOUR EMAIL IS NOT REGISTERED";
 }
 }

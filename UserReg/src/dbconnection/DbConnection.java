@@ -6,11 +6,11 @@ import java.sql.SQLException;
  
 public class DbConnection {
  
-public Connection getConnection() throws Exception
+public static Connection getConnection() throws Exception
 {
 try
 {
-String connectionURL = "jdbc:mysql://localhost:3306/userdb?autoReconnect=true&useSSL=false";
+String connectionURL = "jdbc:mysql://localhost:3306/userdb";
 Connection connection = null;
 Class.forName("com.mysql.jdbc.Driver").newInstance();
 connection = DriverManager.getConnection(connectionURL, "subbu", "subbu123");

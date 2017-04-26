@@ -5,9 +5,10 @@
 <welcome-file-list>
 
 <welcome-file>NewFile.jsp</welcome-file>
-
+<welcome-file>reg1.jsp</welcome-file>
+<welcome-file>upadte.jsp</welcome-file>
 <welcome-file>reg.jsp</welcome-file>
-
+<welcome-file>delete.jsp</welcome-file>
 </welcome-file-list>
 
 
