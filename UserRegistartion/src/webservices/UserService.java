@@ -11,6 +11,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.mysql.jdbc.Connection;
@@ -27,7 +28,8 @@ public class UserService {
 	
 @POST
  @Path("/login")
- @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Produces(MediaType.APPLICATION_JSON) 
+ @Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
  public String login(@FormParam("username") String username,
  @FormParam("password") String password) {
  
@@ -61,6 +63,8 @@ public class UserService {
 	 }
 @POST
 @Path("/register")
+@Produces(MediaType.APPLICATION_JSON) 
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 public String register(@FormParam("FirstName") String FirstName,
 		@FormParam("LastName") String LastName,
 		@FormParam("Email") String Email,
@@ -111,6 +115,8 @@ else{
  } 
 @PUT
 @Path("/update")
+@Produces(MediaType.APPLICATION_JSON) 
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 public String update(@FormParam("FirstName") String FirstName,
 		@FormParam("LastName") String LastName,
 		@FormParam("Email") String Email,
@@ -158,6 +164,8 @@ else{
 		} 
 @DELETE
 @Path("/delete")
+@Produces(MediaType.APPLICATION_JSON) 
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 public String deleet(@FormParam("FirstName") String FirstName,
 		@FormParam("LastName") String LastName,
 		@FormParam("Email") String Email,
