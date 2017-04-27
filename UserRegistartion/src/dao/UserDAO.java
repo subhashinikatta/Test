@@ -8,5 +8,5 @@ public interface UserDAO {
     public int deleteUser( User user );
     public int updateUser( User user );
     public List<User> getAllUsers();
-    public User getUserByFirstName(String FirstName  );
+   
 }

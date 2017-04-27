@@ -1,7 +1,5 @@
 package webservices;
 
-import java.util.ArrayList;
-
 import model.User;
 
 public class Gson {

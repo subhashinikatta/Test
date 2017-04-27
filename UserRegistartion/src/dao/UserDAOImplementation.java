@@ -20,6 +20,7 @@ public class UserDAOImplementation implements UserDAO {
 	    }
 	    public int addUser( User user ) {
 	    	ArrayList<User> userList = new ArrayList<User>();
+	    	int status=0;
 	        try {
 	        	conn= DbConnection.getConnection();
 	            String query = "insert into Employee (FirstName, LastName, Email, username, password, confirmpassword) values(?,?,?,?,?,?)";
@@ -38,7 +39,7 @@ public class UserDAOImplementation implements UserDAO {
 			
 				e.printStackTrace();
 			}
-			return 0;
+			return status;
 	    }
 	    
 	    public int deleteUser( User user) {
@@ -83,30 +84,26 @@ public class UserDAOImplementation implements UserDAO {
 	        return status;
 	    }
 	    public List<User> getAllUsers() {
-	        List<User> users = new ArrayList<User>();
+	        List<User> userList = new ArrayList<User>();
 	        try {
 	            Statement statement = conn.createStatement();
 	            ResultSet resultSet = statement.executeQuery( "select * from Employee" );
 	            while( resultSet.next() ) {
-	                User user = new User(null, null, null, null, null, null);
+	                User user = new User();
 	                user.setFirstName( resultSet.getString( "FirstName" ) );
 	                user.setLastName( resultSet.getString( "LastName" ) );
 	                user.setEmail( resultSet.getString( "Email" ) );
 	                user.setusername( resultSet.getString( "username" ) );
 	                user.setpassword( resultSet.getString( "password" ) );
 	                user.setconfirmpassword( resultSet.getString( "confirmpassword" ) );
-	                users.add(user);
+	                userList.add(user);
 	            }
 	            resultSet.close();
 	            statement.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
-	        return users;
+	        return userList;
 	    }
-		@Override
-		public User getUserByFirstName(String FirstName) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		
 }

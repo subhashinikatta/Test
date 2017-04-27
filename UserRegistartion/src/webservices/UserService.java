@@ -85,29 +85,29 @@ public String register(@FormParam("FirstName") String FirstName,
 	 SecurityManager securityManager= new SecurityManager();
 	 userList = securityManager.getAllUsersList();
 	
-	 for (User user1 : userList) {
+	// for (User user1 : userList) {
 		 String EMAIL_PATTERN = 
 				 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 				 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-if( user1.getEmail() == null || user1.getEmail().trim().equals("")&& !pattern.matcher(Email).matches()&& user1.getusername() == null || user1.getusername().trim().equals("")&& user1.getFirstName() == null || user1.getFirstName().trim().equals("")&& user1.getLastName() == null || user1.getLastName().trim().equals(""))
+if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matcher(Email).matches()&& user.getusername() == null || user.getusername().trim().equals("")&& user.getFirstName() == null || user.getFirstName().trim().equals("")&& user.getLastName() == null || user.getLastName().trim().equals(""))
 {
 					  
-						  System.out.println("please enter valid details");
+						  //System.out.println("please enter valid details");
 					  }
 else{
-	userList.add(user1);
+	userList.add(user);
 	Gson gson=new Gson();
 	users =gson.toJson(user);
 }
 	 }
-	 }
+	 
 	 catch (Exception e)
 	 {
 	 System.out.println("error");
 	 }
 	 
-     /*if(result != 1){ 
+    /* if(result != 1){ 
        return "Invalid Details"; 
     	 } */
     	      return "successfully Registered values"+users; 
@@ -131,26 +131,26 @@ public String update(@FormParam("FirstName") String FirstName,
 	 ArrayList<User> userList = null;
 	 SecurityManager securityManager= new SecurityManager();
 	 userList = securityManager.getAllUsersList();
-	 for (User user2 : userList) {
+	// for (User user2 : userList) {
 		 String EMAIL_PATTERN = 
 				 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 				 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-if( user2.getEmail() == null || user2.getEmail().trim().equals("")&& !pattern.matcher(Email).matches())
+if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matcher(Email).matches())
 {
-	System.out.println("please enter valid email");
+	//System.out.println("please enter valid email");
 		 
 }
 else{
 	if(user.getEmail().equals(Email))	{			  
-		userList.add(user2);
+		userList.add(user);
 		
 		Gson gson =new Gson(); 
 	  users =gson.toJson(user); 
 	  } 
 
 }
-	 }
+	 
 	 }
 	 catch (Exception e)
 	 {
@@ -177,25 +177,25 @@ public String deleet(@FormParam("FirstName") String FirstName,
 	
 	 UserDao.deleteUser(user);
 	 
-    String users=null;
+    String users = null;
 	 try 
 	 {
 	 ArrayList<User> userList = null;
 	 SecurityManager securityManager= new SecurityManager();
 	 userList = securityManager.getAllUsersList();
-	 for (User user3 : userList) {
+	//for (User user3 : userList) {
 		 String EMAIL_PATTERN = 
 				 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 				 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-if( user3.getEmail() == null || user3.getEmail().trim().equals("")&& !pattern.matcher(Email).matches())
+if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matcher(Email).matches())
 {
-	System.out.println("please enter valid email");
+	//System.out.println("please enter valid email");
 		 
 }
 else{
 	if(user.getEmail().equals(Email))	{			  
-		userList.add(user3);
+		userList.add(user);
 		Gson gson =new Gson(); 
 	 		 users =gson.toJson(user); 
 			  } 
@@ -203,14 +203,14 @@ else{
 	
 
 }
-	 }
+	 
 	 }
 	 catch (Exception e)
 	 {
 	 System.out.println("error");
 	 }
 	 
-	 /*if(result != 1){ 
+	/* if(result != 1){ 
 		         return "Invalid email"; 
 		     } */
 		      return "Successfully Deleted "+users; 
