@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import dao.UserDAO;
@@ -24,7 +25,7 @@ import model.User;
 @Path("/user")
 public class UserService {
 	
-	  UserDAO UserDao = new UserDAOImplementation();
+	  UserDAO userDao = new UserDAOImplementation();
 	
 @POST
  @Path("/login")
@@ -75,7 +76,7 @@ public String register(@FormParam("FirstName") String FirstName,
 	 User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
     /* int result = UserDAOImplementation.addUser(user);*/
 	
-	UserDao.addUser(user);
+	userDao.addUser(user);
 	
      String users=null;
      ArrayList<User> userList = new ArrayList<User>();
@@ -110,7 +111,7 @@ else{
     /* if(result != 1){ 
        return "Invalid Details"; 
     	 } */
-    	      return "successfully Registered values"+users; 
+    	      return "successfully Registered values"+ users; 
     	     
  } 
 @PUT
@@ -123,8 +124,9 @@ public String update(@FormParam("FirstName") String FirstName,
         @FormParam("username") String username,
        @FormParam("password") String password,
        @FormParam("confirmpassword") String confirmpassword){
-	 User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
-	 UserDao.updateUser(user);
+	
+	User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
+	 userDao.updateUser(user);
      String users=null;
 	 try 
 	 {
@@ -175,7 +177,7 @@ public String deleet(@FormParam("FirstName") String FirstName,
 	
 	User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
 	
-	 UserDao.deleteUser(user);
+	 userDao.deleteUser(user);
 	 
     String users = null;
 	 try 
@@ -198,9 +200,7 @@ else{
 		userList.add(user);
 		Gson gson =new Gson(); 
 	 		 users =gson.toJson(user); 
-			  } 
-	 
-	
+			  }
 
 }
 	 
