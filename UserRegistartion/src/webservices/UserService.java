@@ -17,11 +17,14 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.Gson;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+
+
 import dao.UserDAO;
 import dao.UserDAOImplementation;
 import model.SecurityManager;
 import model.User;
- 
+
+
 @Path("/user")
 public class UserService {
 	

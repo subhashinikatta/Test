@@ -61,7 +61,7 @@ span.req {
 
             <div class="form-group">
                 <label for="username"><span class="req">* </span> User name:   </label> 
-                    <input class="form-control" type="text" name="username" id = "txt" onkeyup = "Validate(this)" placeholder="minimum 6 letters" required />  
+                    <input class="form-control" type="text" name="username" id = "txt" onkeyup = "Validate(this)"  required />  
                         <div id="errLast"></div>
             </div><br>
 
