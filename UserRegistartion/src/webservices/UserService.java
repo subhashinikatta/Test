@@ -67,8 +67,7 @@ public class UserService {
 	 }
 @POST
 @Path("/register")
-@Produces(MediaType.APPLICATION_JSON) 
-@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public String register(@FormParam("FirstName") String FirstName,
 		@FormParam("LastName") String LastName,
 		@FormParam("Email") String Email,
@@ -99,13 +98,13 @@ if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matc
 					  
 						  //System.out.println("please enter valid details");
 					  }
-if(FirstName.isEmpty()||LastName.isEmpty()||Email.isEmpty()||username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty())
+/*if(FirstName.isEmpty()||LastName.isEmpty()||Email.isEmpty()||username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty())
 	{
 			 System.out.println("Please fill all the fields");
  	}
 	String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	 Pattern test = Pattern.compile(emailRegex);
+	 Pattern pattern = Pattern.compile(emailRegex);
 	   
 		 if( FirstName == "" )
 		   {
@@ -126,7 +125,7 @@ if(FirstName.isEmpty()||LastName.isEmpty()||Email.isEmpty()||username.isEmpty()|
 		  }else if(!emailRegex.test(Email)){
 		  
 			  System.out.println( "enter the valid email");
-		  return Email;
+		  return false;
 		  }
 		   
 			 if(username == "")
@@ -159,14 +158,14 @@ if(FirstName.isEmpty()||LastName.isEmpty()||Email.isEmpty()||username.isEmpty()|
 		  if(FirstName != "" && LastName != "" && Email != "" && username != "" && password != "" && confirmpassword != "" ){
 			  System.out.println( "form submitted successfully");
 		   }
-		     
+		     */
 	
 
 else{
 	userList.add(user);
 	Gson gson=new Gson();
 	users =gson.toJson(user);
-}
+   }
 	 }
 	 
 	 catch (Exception e)
@@ -177,7 +176,7 @@ else{
     /* if(result != 1){ 
        return "Invalid Details"; 
     	 } */
-    	      return "successfully Registered values"+ users ; 
+    	      return "successfully Registered values"+users ; 
     	     
  } 
 @PUT

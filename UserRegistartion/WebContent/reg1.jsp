@@ -90,6 +90,8 @@ span.req {
 	</div>
 </div>
 
+
+
 <script>
 function checkPass()
 {
@@ -190,6 +192,33 @@ var regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{
     document.getElementById("status").innerHTML	= "<span class='valid'>Thanks, you have entered a valid Email address!</span>";	
     }
 }
+$(document).ready(function(){           
+    $('#btn btn-success').click(function(){  
+            var FirstName=document.getElementById("FirstName").value;
+            var LastName=document.getElementById("LastName").value;
+            var Email=document.getElementById("Email").value;     
+            var username=document.getElementById("username").value;  
+            var password=document.getElementById("password").value;
+            var confirmpassword=document.getElementById("confirmpassword").value;
+            var JSONObject= {"FirstName":FirstName, "LastName":LastName, "Email":Email, "username":username, "password":password, "confirmpassword":confirmpassword};
+            var jsonData = JSON.stringify( JSONObject );
+            $.ajax({
+                url: "http://localhost:8024/UserRegistartion/rest/user/register",
+                type: "POST",
+                dataType: "json",                  
+                data: jsonData,
+                contentType: "application/json",
+                success: function(response){
+                   alert(JSON.stringify(response));
+                },
+                error: function(err){
+                   alert(JSON.stringify(err));
+                }
+           });     
+    });  
+}); 
+
+
 </script>
 </center>
 </body>
