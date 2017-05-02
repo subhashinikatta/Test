@@ -63,7 +63,7 @@ public class UserService {
 	 {
 	 System.out.println("error");
 	 }
-	 return "You are not a Valid User";
+	 return "Logged in User:"+username;
 	 }
 @POST
 @Path("/register")
@@ -99,6 +99,69 @@ if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matc
 					  
 						  //System.out.println("please enter valid details");
 					  }
+if(FirstName.isEmpty()||LastName.isEmpty()||Email.isEmpty()||username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty())
+	{
+			 System.out.println("Please fill all the fields");
+ 	}
+	String emailRegex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	 Pattern test = Pattern.compile(emailRegex);
+	   
+		 if( FirstName == "" )
+		   {
+			 System.out.println("Please enter the first names");
+		     return FirstName;
+		   }
+		 if( LastName == "" )
+		   {
+		     
+			 System.out.println("enter the last name");
+		     return LastName;
+		   }
+		    
+		   if (Email == "" )
+		 {
+			   System.out.println( "enter the email");
+		  return Email;
+		  }else if(!emailRegex.test(Email)){
+		  
+			  System.out.println( "enter the valid email");
+		  return Email;
+		  }
+		   
+			 if(username == "")
+			  {
+			  
+				 System.out.println( "enter the username");
+			   return username;
+			  } 
+		  
+		   
+		 if(password == "")
+		  {
+		  
+			 System.out.println( "enter the password");
+		   return password;
+		  }
+		  
+		 if(confirmpassword == "")
+		  {
+		  
+			 System.out.println( "enter the confirmpassword");
+		   return confirmpassword;
+		  }else if(!emailRegex.test(confirmpassword)){
+			  System.out.println("Re-enter the valid password");
+			  return confirmpassword;
+			  }
+			
+		  
+		 
+		  if(FirstName != "" && LastName != "" && Email != "" && username != "" && password != "" && confirmpassword != "" ){
+			  System.out.println( "form submitted successfully");
+		   }
+		     
+	
+
 else{
 	userList.add(user);
 	Gson gson=new Gson();
@@ -114,7 +177,7 @@ else{
     /* if(result != 1){ 
        return "Invalid Details"; 
     	 } */
-    	      return "successfully Registered values"+ users; 
+    	      return "successfully Registered values"+ users ; 
     	     
  } 
 @PUT

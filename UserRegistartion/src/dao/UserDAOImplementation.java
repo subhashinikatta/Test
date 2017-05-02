@@ -13,7 +13,7 @@ import util.DbConnection;
 public class UserDAOImplementation implements UserDAO {
  
 	
-	 private static DbConnection database= new DbConnection();
+	 //private static DbConnection database= new DbConnection();
 	 private static Connection conn;
 	 
 	    public UserDAOImplementation(){

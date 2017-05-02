@@ -37,7 +37,6 @@ span.req {
 <div class="container">
 	<div class="row">
         <div class="col-md-6">
-            <form action="" method="post" id="fileForm" role="form">
             <fieldset><legend class="text-center"> Registration Page. <span class="req"></span></legend>
 
 
@@ -120,6 +119,58 @@ function checkPass()
         message.innerHTML = "Passwords Do Not Match!"
     }
 } 
+function Submit(){
+	 var emailRegex = /^[A-Za-z0-9._]*\@[A-Za-z]*\.[A-Za-z]{2,5}$/;
+	 var fname = document.form.FirstName.value,
+	  lname = document.form.LastName.value,
+	  email = document.form.Email.value,
+	username= document.form.username.value,
+	  password = document.form.password.value,
+	 confirmpassword = document.form.confirmpassword.value;
+	   
+	 if( fname == "" )
+	   {
+	     document.form.Name.focus() ;
+	  document.getElementById("errorBox").innerHTML = "enter the first name";
+	     return false;
+	   }
+	 if( lname == "" )
+	   {
+	     document.form.LastName.focus() ;
+	   document.getElementById("errorBox").innerHTML = "enter the last name";
+	     return false;
+	   }
+	    
+	   if (email == "" )
+	 {
+	  document.form.Email.focus();
+	  document.getElementById("errorBox").innerHTML = "enter the email";
+	  return false;
+	  }else if(!emailRegex.test(email)){
+	  document.form.Email.focus();
+	  document.getElementById("errorBox").innerHTML = "enter the valid email";
+	  return false;
+	  }
+	   
+	  
+	   
+	 if(password == "")
+	  {
+	   document.form.Password.focus();
+	   document.getElementById("errorBox").innerHTML = "enter the password";
+	   return false;
+	  }
+	   
+	  
+	  if(document.form.radiobutton[0].checked == false && document.form.radiobutton[1].checked == false){
+	    document.getElementById("errorBox").innerHTML = "select your gender";
+	    return false;
+	   }
+	  if(fname != '' && lname != '' && email != '' && username != '' && password != '' && confirmpassword != '' ){
+	   document.getElementById("errorBox").innerHTML = "form submitted successfully";
+	   }
+	     
+	}
 
 // validates text only
 function Validate(txt) {
@@ -139,8 +190,6 @@ var regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{
     document.getElementById("status").innerHTML	= "<span class='valid'>Thanks, you have entered a valid Email address!</span>";	
     }
 }
-
-
 </script>
 </center>
 </body>
