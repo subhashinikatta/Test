@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
  
 import model.User;
-import util.DbConnection;
+import util.JDBCSingleton;
  
 public class UserDAOImplementation implements UserDAO {
  
-	
-	 //private static DbConnection database= new DbConnection();
+	JDBCSingleton jdbc= JDBCSingleton.getInstance();  
+	// private static DbConnection database= new DbConnection();
 	 private static Connection conn;
 	 
 	    public UserDAOImplementation(){
@@ -24,8 +24,8 @@ public class UserDAOImplementation implements UserDAO {
 	    	ArrayList<User> userList = new ArrayList<User>();
 	    	int status=0;
 	        try {
-	        	conn= DbConnection.getConnection();
-	            String query = "insert into Employee (FirstName, LastName, Email, username, password, confirmpassword) values(?,?,?,?,?,?)";
+	        	conn= JDBCSingleton.getConnection();
+	            String query = "insert into Employee (firstName, lastName, email, username, password, confirmpassword) values(?,?,?,?,?,?)";
 	            PreparedStatement preparedStatement = conn.prepareStatement( query );
 	            preparedStatement.setString( 1, user.getFirstName() );
 	            preparedStatement.setString( 2, user.getLastName() );
@@ -48,8 +48,8 @@ public class UserDAOImplementation implements UserDAO {
 	    	ArrayList<User> userList = new ArrayList<User>();
 	    	int status=0;
 	        try {
-	        	conn= DbConnection.getConnection();
-	            String query = "delete from Employee where Email=?";
+	        	conn= JDBCSingleton.getConnection();
+	            String query = "delete from Employee where email=?";
 	            PreparedStatement preparedStatement = conn.prepareStatement(query);
 	            preparedStatement.setString(1,user.getEmail());
 	            preparedStatement.executeUpdate();
@@ -66,8 +66,8 @@ public class UserDAOImplementation implements UserDAO {
 	    	ArrayList<User> userList = new ArrayList<User>();
 	    	int status=0;
 	        try {
-	        	conn= DbConnection.getConnection();
-	            String query = "update Employee set FirstName=?,LastName=?, username=?, password=?, confirmpassword=? where  Email=?";
+	        	conn= JDBCSingleton.getConnection();
+	            String query = "update Employee set firstName=?,lastName=?, username=?, password=?, confirmpassword=? where  email=?";
 	            PreparedStatement preparedStatement = conn.prepareStatement( query );
 	            preparedStatement.setString( 1, user.getFirstName() );
 	            preparedStatement.setString( 2, user.getLastName() );
@@ -92,9 +92,9 @@ public class UserDAOImplementation implements UserDAO {
 	            ResultSet resultSet = statement.executeQuery( "select * from Employee" );
 	            while( resultSet.next() ) {
 	                User user = new User();
-	                user.setFirstName( resultSet.getString( "FirstName" ) );
-	                user.setLastName( resultSet.getString( "LastName" ) );
-	                user.setEmail( resultSet.getString( "Email" ) );
+	                user.setFirstName( resultSet.getString( "firstName" ) );
+	                user.setLastName( resultSet.getString( "lastName" ) );
+	                user.setEmail( resultSet.getString( "email" ) );
 	                user.setusername( resultSet.getString( "username" ) );
 	                user.setpassword( resultSet.getString( "password" ) );
 	                user.setconfirmpassword( resultSet.getString( "confirmpassword" ) );

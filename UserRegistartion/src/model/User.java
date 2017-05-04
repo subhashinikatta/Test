@@ -1,9 +1,9 @@
 package model;
 public class User {
 
-private String FirstName;
-private String LastName;
-private String Email;
+private String firstName;
+private String lastName;
+private String email;
 private String username;
 private String password;
 private String confirmpassword;
@@ -11,13 +11,13 @@ private String confirmpassword;
 public User(){
 }
 
-public User(String FirstName,String LastName,String Email,String username,String password,String confirmpassword) {
+public User(String firstName,String lastName,String email,String username,String password,String confirmpassword) {
     this.username = username; 
     this.password = password;
     this.confirmpassword = confirmpassword;
-    this.FirstName=FirstName;
-    this.LastName=LastName;
-    this.Email=Email;
+    this.firstName=firstName;
+    this.lastName=lastName;
+    this.email=email;
     }
 
 public void setusername(String username) {
@@ -28,29 +28,29 @@ public void setpassword(String password) {
 this.password = password;
 }
 public void setLastName(String string) {
-	this.LastName=LastName;
+	this.lastName=lastName;
 	
 }
 public void setEmail(String string) {
-	this.Email=Email;
+	this.email=email;
 	
 }
 public void setFirstName(String string) {
-	  this.FirstName=FirstName;
+	  this.firstName=firstName;
 	
 }
 public void setconfirmpassword(String string) {
 	 this.confirmpassword = confirmpassword;
 }
 public String getFirstName() {
-	return FirstName;
+	return firstName;
 }
 public String getLastName() {
-	return LastName;
+	return lastName;
 	
 }
 public String getEmail() {
-	return Email;
+	return email;
 
 }
 public String getusername() {

@@ -67,7 +67,8 @@ public class UserService {
 	 }
 @POST
 @Path("/register")
-@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Produces(MediaType.APPLICATION_JSON) 
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 public String register(@FormParam("FirstName") String FirstName,
 		@FormParam("LastName") String LastName,
 		@FormParam("Email") String Email,
@@ -78,7 +79,7 @@ public String register(@FormParam("FirstName") String FirstName,
 	 User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
     /* int result = UserDAOImplementation.addUser(user);*/
 	
-	userDao.addUser(user);
+	 int result=userDao.addUser(user);
 	
      String users=null;
      ArrayList<User> userList = new ArrayList<User>();
@@ -88,16 +89,16 @@ public String register(@FormParam("FirstName") String FirstName,
 	 SecurityManager securityManager= new SecurityManager();
 	 userList = securityManager.getAllUsersList();
 	
-	// for (User user1 : userList) {
+	/*// for (User user1 : userList) {
 		 String EMAIL_PATTERN = 
 				 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 				 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matcher(Email).matches()&& user.getusername() == null || user.getusername().trim().equals("")&& user.getFirstName() == null || user.getFirstName().trim().equals("")&& user.getLastName() == null || user.getLastName().trim().equals(""))
+				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);*/
+/*if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matcher(Email).matches()&& user.getusername() == null || user.getusername().trim().equals("")&& user.getFirstName() == null || user.getFirstName().trim().equals("")&& user.getLastName() == null || user.getLastName().trim().equals(""))
 {
 					  
 						  //System.out.println("please enter valid details");
-					  }
+					  }*/
 /*if(FirstName.isEmpty()||LastName.isEmpty()||Email.isEmpty()||username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty())
 	{
 			 System.out.println("Please fill all the fields");
@@ -153,19 +154,19 @@ if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matc
 			  return confirmpassword;
 			  }
 			
-		  
+		  */
 		 
 		  if(FirstName != "" && LastName != "" && Email != "" && username != "" && password != "" && confirmpassword != "" ){
 			  System.out.println( "form submitted successfully");
 		   }
-		     */
+		     
 	
 
 else{
 	userList.add(user);
 	Gson gson=new Gson();
 	users =gson.toJson(user);
-   }
+}
 	 }
 	 
 	 catch (Exception e)
