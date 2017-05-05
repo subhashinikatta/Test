@@ -1,3 +1,0 @@
- Provide the  username and password, which are encoded and added to the request headers.
-   Create image using createImage api. Also can modify, delete, upload and download Image.  
-   List the available images using listImages.
