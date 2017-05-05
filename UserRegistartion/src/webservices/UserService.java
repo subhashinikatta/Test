@@ -30,7 +30,7 @@ import util.JDBCSingleton;
 public class UserService {
 	
 	  UserDAO userDao = new UserDAOImplementation();
-		JDBCSingleton jdbc= JDBCSingleton.getInstance();
+		
 @POST
  @Path("/login")
 /*@Produces(MediaType.APPLICATION_JSON) */
@@ -81,7 +81,7 @@ public String register(@FormParam("FirstName") String FirstName,
     /* int result = UserDAOImplementation.addUser(user);*/
 	
 	 userDao.addUser(user);
-	jdbc.addUser(user);
+	
      String users=null;
      ArrayList<User> userList = new ArrayList<User>();
      try
@@ -194,7 +194,7 @@ public String update(@FormParam("FirstName") String FirstName,
 	
 	User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
 	 userDao.updateUser(user);
-	 jdbc.updateUser(user);
+	 
      String users=null;
 	 try 
 	 {
@@ -246,7 +246,7 @@ public String deleet(@FormParam("FirstName") String FirstName,
 	User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
 	
 	 userDao.deleteUser(user);
-	 jdbc.deleteUser(user);
+	
     String users = null;
 	 try 
 	 {

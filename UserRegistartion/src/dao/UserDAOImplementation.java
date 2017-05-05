@@ -12,8 +12,7 @@ import util.JDBCSingleton;
  
 public class UserDAOImplementation implements UserDAO {
  
-	//JDBCSingleton jdbc= JDBCSingleton.getInstance();  
-	// private static DbConnection database= new DbConnection();
+	JDBCSingleton jdbc= JDBCSingleton.getInstance();
 	 private static Connection conn;
 	 
 	    public UserDAOImplementation(){
@@ -24,7 +23,6 @@ public class UserDAOImplementation implements UserDAO {
 	    	ArrayList<User> userList = new ArrayList<User>();
 	    	int status=0;
 	        try {
-	        
 	        	conn= JDBCSingleton.getConnection();
 	            String query = "insert into Employee (firstName, lastName, email, username, password, confirmpassword) values(?,?,?,?,?,?)";
 	            PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -49,7 +47,7 @@ public class UserDAOImplementation implements UserDAO {
 	    	ArrayList<User> userList = new ArrayList<User>();
 	    	int status=0;
 	        try {
-	        	//conn= JDBCSingleton.getConnection();
+	        	conn= JDBCSingleton.getConnection();
 	            String query = "delete from Employee where email=?";
 	            PreparedStatement preparedStatement = conn.prepareStatement(query);
 	            preparedStatement.setString(1,user.getEmail());
@@ -67,7 +65,7 @@ public class UserDAOImplementation implements UserDAO {
 	    	ArrayList<User> userList = new ArrayList<User>();
 	    	int status=0;
 	        try {
-	        	//conn= JDBCSingleton.getConnection();
+	        	conn= JDBCSingleton.getConnection();
 	            String query = "update Employee set firstName=?,lastName=?, username=?, password=?, confirmpassword=? where  email=?";
 	            PreparedStatement preparedStatement = conn.prepareStatement( query );
 	            preparedStatement.setString( 1, user.getFirstName() );
@@ -90,7 +88,7 @@ public class UserDAOImplementation implements UserDAO {
 	        List<User> userList = new ArrayList<User>();
 	        try {
 	            Statement statement = conn.createStatement();
-	           // conn= JDBCSingleton.getConnection();
+	           conn= JDBCSingleton.getConnection();
 	            ResultSet resultSet = statement.executeQuery( "select * from Employee" );
 	            while( resultSet.next() ) {
 	                User user = new User();
