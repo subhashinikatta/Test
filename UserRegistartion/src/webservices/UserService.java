@@ -23,17 +23,18 @@ import dao.UserDAO;
 import dao.UserDAOImplementation;
 import model.SecurityManager;
 import model.User;
+import util.JDBCSingleton;
 
 
 @Path("/user")
 public class UserService {
 	
 	  UserDAO userDao = new UserDAOImplementation();
-	
+		JDBCSingleton jdbc= JDBCSingleton.getInstance();
 @POST
  @Path("/login")
-@Produces(MediaType.APPLICATION_JSON) 
- @Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
+/*@Produces(MediaType.APPLICATION_JSON) */
+/* @Consumes(MediaType.APPLICATION_FORM_URLENCODED) */
  public String login(@FormParam("username") String username,
  @FormParam("password") String password) {
  
@@ -68,7 +69,7 @@ public class UserService {
 @POST
 @Path("/register")
 @Produces(MediaType.APPLICATION_JSON) 
-@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
+
 public String register(@FormParam("FirstName") String FirstName,
 		@FormParam("LastName") String LastName,
 		@FormParam("Email") String Email,
@@ -79,8 +80,8 @@ public String register(@FormParam("FirstName") String FirstName,
 	 User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
     /* int result = UserDAOImplementation.addUser(user);*/
 	
-	 int result=userDao.addUser(user);
-	
+	 userDao.addUser(user);
+	jdbc.addUser(user);
      String users=null;
      ArrayList<User> userList = new ArrayList<User>();
      try
@@ -89,16 +90,16 @@ public String register(@FormParam("FirstName") String FirstName,
 	 SecurityManager securityManager= new SecurityManager();
 	 userList = securityManager.getAllUsersList();
 	
-	/*// for (User user1 : userList) {
+	// for (User user1 : userList) {
 		 String EMAIL_PATTERN = 
 				 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 				 + "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);*/
-/*if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matcher(Email).matches()&& user.getusername() == null || user.getusername().trim().equals("")&& user.getFirstName() == null || user.getFirstName().trim().equals("")&& user.getLastName() == null || user.getLastName().trim().equals(""))
+				 Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+if( user.getEmail() == null || user.getEmail().trim().equals("")&& !pattern.matcher(Email).matches()&& user.getusername() == null || user.getusername().trim().equals("")&& user.getFirstName() == null || user.getFirstName().trim().equals("")&& user.getLastName() == null || user.getLastName().trim().equals(""))
 {
 					  
 						  //System.out.println("please enter valid details");
-					  }*/
+					  }
 /*if(FirstName.isEmpty()||LastName.isEmpty()||Email.isEmpty()||username.isEmpty()||password.isEmpty()||confirmpassword.isEmpty())
 	{
 			 System.out.println("Please fill all the fields");
@@ -154,12 +155,12 @@ public String register(@FormParam("FirstName") String FirstName,
 			  return confirmpassword;
 			  }
 			
-		  */
+		  
 		 
 		  if(FirstName != "" && LastName != "" && Email != "" && username != "" && password != "" && confirmpassword != "" ){
 			  System.out.println( "form submitted successfully");
 		   }
-		     
+		     */
 	
 
 else{
@@ -193,6 +194,7 @@ public String update(@FormParam("FirstName") String FirstName,
 	
 	User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
 	 userDao.updateUser(user);
+	 jdbc.updateUser(user);
      String users=null;
 	 try 
 	 {
@@ -244,7 +246,7 @@ public String deleet(@FormParam("FirstName") String FirstName,
 	User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
 	
 	 userDao.deleteUser(user);
-	 
+	 jdbc.deleteUser(user);
     String users = null;
 	 try 
 	 {
