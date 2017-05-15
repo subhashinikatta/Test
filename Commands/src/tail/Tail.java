@@ -1,31 +1,40 @@
-package tail;  
-import java.io.BufferedReader;
-    import java.io.FileReader;
-    import java.io.IOException;
+import java.io.*;
 
-    
-    public class Tail {
+public class Tail {
 
-      public static void main(String[] args) throws IOException {
+  public Tail(File f) throws java.io.IOException, java.lang.InterruptedException{
 
-        if (args.length > 0){
+    int pos = 0;
+    RandomAccessFile file = new RandomAccessFile(f, "r");
+    pos = (int)file.length() - (int)Math.min(400, file.length());
+    file.seek(pos);
+    for  (;true; Thread.currentThread().sleep(2000)){
+      int l = (int)(file.length()-pos);
+      if (l <= 0) continue;
+      byte[] buf = new byte[l];
+      int read = file.read(buf,0, l);
+      String out = new String(buf, 0,l);
+      System.out.print(out);
+      pos = pos+l;
 
-
-          BufferedReader input = new BufferedReader(new FileReader(args[0]));
-          String currentLine = null;
-
-          while((currentLine = input.readLine()) != null) {
-
-        {
-          System.out.println(currentLine);
-          continue;
-        }
-
-          }
-          input.close();
-
-        } else {
-          System.out.println("Missing parameter!\nUsage: java JavaTail fileName [updateTime (Seconds. default to 1 second)]");
-        }
-      }
     }
+  }
+
+  public static void main(String[] args) {
+    try{
+      Tail tail1 = new Tail(new File(args[0]));
+    }
+    catch (ArrayIndexOutOfBoundsException a){
+      System.out.println("Usage : Tail <file>");
+      System.exit(1);
+    }
+    catch (java.io.IOException io){
+      System.err.println(io.getMessage());
+      System.exit(1);
+    }
+    catch (Exception xe){
+      xe.printStackTrace();
+      System.exit(1);
+    }
+  }
+}
