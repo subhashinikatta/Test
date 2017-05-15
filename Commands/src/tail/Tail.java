@@ -9,11 +9,6 @@ import java.io.BufferedReader;
       public static void main(String[] args) throws IOException {
 
         if (args.length > 0){
-
-          long n;
-		if (args.length > 1)
-       n = Long.parseLong(args[1]) ;
-
           BufferedReader input = new BufferedReader(new FileReader(args[0]));
           String currentLine = null;
 
