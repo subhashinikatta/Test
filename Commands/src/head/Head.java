@@ -8,9 +8,10 @@ import java.io.IOException;
 public class Head {
     public static String[] headLines(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
-        String[] lines = new String[10];
-        String line;
         int n = 0;
+        String[] lines = new String[n];
+        String line;
+       
         int Line = 0;
         while((line = reader.readLine()) != null) {
             lines[Line++] = line;
@@ -22,7 +23,7 @@ public class Head {
     }
 
     public static void main(String[] args) throws IOException {
-        if(args.length != 1) {
+        if(args.length >= 1) {
             System.out.println("Error");
         }
         String[] lines = headLines(args[0]);
