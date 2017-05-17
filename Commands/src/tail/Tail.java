@@ -1,40 +1,50 @@
-import java.io.*;
 
-public class Tail {
+ import java.io.RandomAccessFile;
+import java.util.HashMap;
+import java.util.Map;
 
-  public Tail(File f) throws java.io.IOException, java.lang.InterruptedException{
 
-    int pos = 0;
-    RandomAccessFile file = new RandomAccessFile(f, "r");
-    pos = (int)file.length() - (int)Math.min(400, file.length());
-    file.seek(pos);
-    for  (;true; Thread.currentThread().sleep(2000)){
-      int l = (int)(file.length()-pos);
-      if (l <= 0) continue;
-      byte[] buf = new byte[l];
-      int read = file.read(buf,0, l);
-      String out = new String(buf, 0,l);
-      System.out.print(out);
-      pos = pos+l;
+  class Tail {
+    public static void main(String args[]) {
+    Map<Long, String> strmap = new HashMap<Long, String>();
+    long numberOfLines = Long.valueOf(args[1]).longValue();
+    try {
+        /*
+         * Receive file name and no of lines to tail as command line
+         * argument
+         */
+        RandomAccessFile randomFile = new RandomAccessFile(args[0], "r");
 
-    }
-  }
+        long filelength = randomFile.length();
+        long filepos = filelength - 1;
+        long linescovered = 1;
+        System.out.println(filepos);
+        for (linescovered = 1; linescovered <= numberOfLines; filepos--) {
+            randomFile.seek(filepos);
+         
+            if (randomFile.readByte() == 0xA)
+                if (filepos == filelength - 1)
+                    continue;
+                else {
+                         strmap.put(linescovered,randomFile.readLine());
+                    linescovered++;
+                }
 
-  public static void main(String[] args) {
-    try{
-      Tail tail1 = new Tail(new File(args[0]));
+
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-    catch (ArrayIndexOutOfBoundsException a){
-      System.out.println("Usage : Tail <file>");
-      System.exit(1);
+    long startPosition = numberOfLines;
+    while (startPosition != 0) {
+        if (strmap.containsKey(startPosition)) {
+            // System.out.println("HashMap contains "+ startPosition
+            // +" as key");
+            String outstr = strmap.get(startPosition);
+            System.out.println(outstr);
+            startPosition--;
+
+        }
     }
-    catch (java.io.IOException io){
-      System.err.println(io.getMessage());
-      System.exit(1);
-    }
-    catch (Exception xe){
-      xe.printStackTrace();
-      System.exit(1);
-    }
-  }
+}
 }

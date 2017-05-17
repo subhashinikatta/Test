@@ -1,36 +1,49 @@
-package head;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 
-public class Head {
-    public static String[] headLines(String filename) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filename));
-        int n = 0;
-        String[] lines = new String[n];
-        String line;
-       
-        int Line = 0;
-        while((line = reader.readLine()) != null) {
-            lines[Line++] = line;
-            if(Line >= n) {
-                break;
-            }
+ import java.io.RandomAccessFile;
+import java.util.HashMap;
+import java.util.Map;
+
+
+ class Head{
+    public static void main(String args[]) {
+    Map<Long, String> strmap = new HashMap<Long, String>();
+    long numberOfLines = Long.valueOf(args[1]).longValue();
+    try {
+        /*
+         * Receive file name and no of lines to tail as command line
+         * argument
+         */
+        RandomAccessFile randomFile = new RandomAccessFile(args[0], "r");
+
+        long filelength = randomFile.length();
+        long filepos = 0;
+        long linescovered = 1;
+        System.out.println(filepos);
+        for (linescovered = 1; linescovered <= numberOfLines; filepos++) {
+            randomFile.seek(filepos);
+            if (randomFile.readByte() == 0xA)
+                if (filepos == filelength + 1)
+                    continue;
+                else {
+                         strmap.put(linescovered,randomFile.readLine());
+                    linescovered++;
+                }
+
         }
-        return lines;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    long startPosition = numberOfLines;
+    while (startPosition != 0) {
+        if (strmap.containsKey(startPosition)) {
+            // System.out.println("HashMap contains "+ startPosition
+            // +" as key");
+            String outstr = strmap.get(startPosition);
+            System.out.println(outstr);
+            startPosition--;
 
-    public static void main(String[] args) throws IOException {
-        if(args.length >= 1) {
-            System.out.println("Error");
-        }
-        String[] lines = headLines(args[0]);
-        for(String line : lines) {
-            if(!line.isEmpty()) {
-                System.out.println(line);
-            }
         }
     }
+}
 }
