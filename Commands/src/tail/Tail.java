@@ -10,7 +10,7 @@ import java.util.Vector;
 public class Tail {
 	
 //tail method starts
-     public static  StringBuffer tail(String options, String filename) throws IOException
+     public static  StringBuffer tail(int options, String filename) throws IOException
          {
     	
     	 ArrayList<String> List = new ArrayList<String>();
@@ -55,12 +55,13 @@ public class Tail {
     	 }
      public static void main(String args[])
      {
-       
+    	 int a=25;
          String filename="";
          String options= "";// default size
          if (args.length==2)
          {
         	 options=args[0];
+        	 a=Integer.parseInt(args[0]);
         	 filename=args[1];
          }
          else
@@ -71,7 +72,7 @@ public class Tail {
          try
          {
         
-			System.out.println(tail(options, filename));  // calling tail method to search lines
+			System.out.println(tail(a, filename));  // calling tail method to search lines
          }
          catch(IOException io)  { 
         	 System.out.println("IO Error"); 
