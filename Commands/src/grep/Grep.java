@@ -5,7 +5,7 @@ import java.io.*;
 class Grep {
     public static void main(String args[]) {
         if (args.length != 2) {
-            System.err.println("Usage: Grep pattern file");
+            System.out.println("Usage: Grep pattern file");
             System.exit(1);
         }
 
@@ -13,7 +13,7 @@ class Grep {
         try {
             cre = Pattern.compile(args[0]);
         } catch (PatternSyntaxException e) {
-            System.err.println("Invalid RE syntax: " + e.getDescription());
+            System.out.println("Invalid RE syntax: " + e.getDescription());
             System.exit(1);
         }
 
@@ -22,7 +22,7 @@ class Grep {
             in = new BufferedReader(new InputStreamReader(
                  new FileInputStream(args[1])));
         } catch (FileNotFoundException e) {
-            System.err.println("Unable to open file " +
+            System.out.println("Unable to open file " +
                 args[1] + ": " + e.getMessage());
             System.exit(1);
         }
@@ -35,7 +35,7 @@ class Grep {
                     System.out.println(s);
             }
         } catch (Exception e) {
-            System.err.println("Error reading line: " + e.getMessage());
+            System.out.println("Error reading line: " + e.getMessage());
             System.exit(1);
         }
     }

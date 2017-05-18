@@ -1,50 +1,83 @@
+package tail;
 
- import java.io.RandomAccessFile;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Vector;
 
+public class Tail {
+	
+//tail method starts
+     public static  StringBuffer Tail(int tailSize, String filename) throws IOException
+         {
+    	
+    	 Vector<String> List = new Vector<String>(5000,500);
+    	 StringBuffer output = new StringBuffer("");
+    	 String thisLine;
 
-  class Tail {
-    public static void main(String args[]) {
-    Map<Long, String> strmap = new HashMap<Long, String>();
-    long numberOfLines = Long.valueOf(args[1]).longValue();
-    try {
-        /*
-         * Receive file name and no of lines to tail as command line
-         * argument
-         */
-        RandomAccessFile randomFile = new RandomAccessFile(args[0], "r");
+    	 try
+    	 {
+    	 FileReader fr = new FileReader( filename );
+    	 BufferedReader myInput = new BufferedReader( fr );
 
-        long filelength = randomFile.length();
-        long filepos = filelength - 1;
-        long linescovered = 1;
-        System.out.println(filepos);
-        for (linescovered = 1; linescovered <= numberOfLines; filepos--) {
-            randomFile.seek(filepos);
-         
-            if (randomFile.readByte() == 0xA)
-                if (filepos == filelength - 1)
-                    continue;
-                else {
-                         strmap.put(linescovered,randomFile.readLine());
-                    linescovered++;
-                }
+    	 while( ( thisLine = myInput.readLine() ) != null )
+    	 {
+    	 List.add( thisLine );
+    	 }
 
+    	 } // end try
+    	 catch( IOException e )
+    	 {
+    	 output.append( "Error reading file: " + e );
+    	 }
 
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    long startPosition = numberOfLines;
-    while (startPosition != 0) {
-        if (strmap.containsKey(startPosition)) {
-            // System.out.println("HashMap contains "+ startPosition
-            // +" as key");
-            String outstr = strmap.get(startPosition);
-            System.out.println(outstr);
-            startPosition--;
+    	 List.trimToSize();
 
-        }
-    }
-}
+    	 int end = List.size();
+    	 int start = List.size() - tailSize;
+    	 if( start < 0 )
+    	 { start = 0;
+    	 tailSize = end; 
+    	 }
+    	 output.append( "========== Tail [" + filename + "]\n" );
+    	 output.append( "========== Showing last [" + tailSize + "] lines\n" );
+
+    	 for( int i = start; i < end; i++ )
+    	 {
+    	 output.append( (String)List.get(i) + "\n" );
+    	 }
+    	 output.append( "========== END\n" );
+
+    	 return output;
+    	 }
+     public static void main(String args[])
+     {
+       
+         String filename="";
+         int tailSize = 0;
+         if (args.length==2)
+         {
+        	 filename=args[1];
+         }
+         else
+         {
+             exit();
+         }
+          
+         try
+         {
+        	System.out.println(Tail(tailSize, filename));  // calling tail method to search lines
+         }
+         catch(IOException io)  { 
+        	 System.out.println("IO Error"); 
+        	 }
+     }
+
+     public static void exit()
+     {
+             System.out.println("Syntax : java tail [options] file_name "  );
+            
+             System.exit(0);
+     }
 }
