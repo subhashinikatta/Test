@@ -1,49 +1,49 @@
 
 
- import java.io.RandomAccessFile;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
+public class Head{
 
- class Head{
-    public static void main(String args[]) {
-    Map<Long, String> strmap = new HashMap<Long, String>();
-    long numberOfLines = Long.valueOf(args[1]).longValue();
-    try {
-        /*
-         * Receive file name and no of lines to tail as command line
-         * argument
-         */
-        RandomAccessFile randomFile = new RandomAccessFile(args[0], "r");
+private static String fileName="";
+public static int headSize;
 
-        long filelength = randomFile.length();
-        long filepos = 0;
-        long linescovered = 1;
-        System.out.println(filepos);
-        for (linescovered = 1; linescovered <= numberOfLines; filepos++) {
-            randomFile.seek(filepos);
-            if (randomFile.readByte() == 0xA)
-                if (filepos == filelength + 1)
-                    continue;
-                else {
-                         strmap.put(linescovered,randomFile.readLine());
-                    linescovered++;
-                }
+public static void main(String args[]){
+int argsLength = args.length;
 
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    long startPosition = numberOfLines;
-    while (startPosition != 0) {
-        if (strmap.containsKey(startPosition)) {
-            // System.out.println("HashMap contains "+ startPosition
-            // +" as key");
-            String outstr = strmap.get(startPosition);
-            System.out.println(outstr);
-            startPosition--;
-
-        }
-    }
+if( argsLength == 0 ) System.exit(0);
+if( argsLength == 2 )
+{
+System.out.println(Head.head(new Integer( args[0] ).intValue(),args[1] ) );
 }
+}
+public static StringBuffer head(int headSize,String fileName){
+String thisLine;
+StringBuffer output = new StringBuffer("");
+ArrayList<String> List = new ArrayList<String>();
+try{
+FileReader fr = new FileReader( fileName );
+BufferedReader br = new BufferedReader( fr );
+while( ( thisLine = br.readLine() ) != null )
+{
+List.add( thisLine );
+}
+br.close();
+} // end try
+catch( IOException e )
+{
+output.append( "Error reading file: " + e );
+}
+int end= headSize;
+
+int start = 0;
+for(int i=start; i <end; i++)
+{
+output.append( (String)List.get(i) + "\n" );
+}
+return output;
+}
+
 }
