@@ -22,7 +22,7 @@ public class Head2 {
         if(args.length != 2) {
             throw new IllegalArgumentException();
         }
-        String[] lines = headLines(new Integer( args[0] ).intValue(),args[1] );
+        String[] lines = headLines(Integer.parseInt( args[0] ),args[1] );
         for(String line : lines) {
             if(!line.isEmpty()) {
                 System.out.println(line);

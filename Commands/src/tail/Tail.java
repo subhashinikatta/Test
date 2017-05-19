@@ -15,7 +15,7 @@ int argsLength = args.length;
 if( argsLength == 0 ) System.exit(0);
 if( argsLength == 2 )
 {
-System.out.println(Tail1.tail(new Integer( args[0] ).intValue(),args[1] ) );
+System.out.println(Tail1.tail(Integer.parseInt( args[0] ),args[1] ) );
 }
 }
 public static StringBuffer tail(int tailSize,String fileName){
