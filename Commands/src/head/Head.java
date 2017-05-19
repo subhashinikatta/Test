@@ -16,7 +16,7 @@ int argsLength = args.length;
 if( argsLength == 0 ) System.exit(0);
 if( argsLength == 2 )
 {
-System.out.println(Head.head(Integer.parseInt( args[0] ),args[1] ) );
+System.out.println(Head.head( Integer.parseInt( args[0] ).intValue(),args[1] ) );
 }
 }
 public static StringBuffer head(int headSize,String fileName){
