@@ -23,6 +23,25 @@ public class Demo {
 	      }
 	    } 
 	   }
+	public static void printnthPrimes(int max){
+		
+	    int num, count, i;
+	    num=1;
+	    count=0;
+	 
+	    while (count < max){
+	      num=num+1;
+	      for (i = 2; i <= num; i++){
+	        if (num % i == 0) {
+	          break;
+	        }
+	      }
+	      if ( i == num){
+	        count = count+1;
+	      }
+	    }
+	    System.out.println("Value of nth prime: " + num);
+	}
 	public static void printFirstPrime(int n)// print first n numbers
 	{
 		   //   int n = 0;
@@ -49,19 +68,16 @@ public class Demo {
 		         num++;
 		      }         
 		   }
-	public static void evenOddPrime(int n)// finding odd even and prime numbers in given array
+	public static void evenOddPrime(String args[])// finding odd even and prime numbers in given array
 	{
-        s = new Scanner(System.in);
-        System.out.print("Enter no. of elements you want in array:");
-        n = s.nextInt();
-        int[] a = new int[n];
-        System.out.println("Enter all the elements:");
-        for (int i = 0; i < n; i++) 
+        int a[] = new int[20];
+        try{
+        for (int i = 0; i < args.length ; i++) 
         {
-            a[i] = s.nextInt();
+            a[i]=Integer.parseInt(args[i]);
         }
         System.out.print("Odd numbers:");
-        for(int i = 0 ; i < n ; i++)
+        for(int i = 0 ; i < args.length ; i++)
         {
             if(a[i] % 2 != 0)
             {
@@ -70,7 +86,7 @@ public class Demo {
         }
         System.out.println("");
         System.out.print("Even numbers:");
-        for(int i = 0 ; i < n ; i++)
+        for(int i = 0 ; i < args.length ; i++)
         {
             if(a[i] % 2 == 0)
             {
@@ -80,7 +96,7 @@ public class Demo {
         System.out.println("");
         System.out.print("Prime numbers:");  
         //loop through the numbers one by one
-        for(int i=0; i<a.length; i++){
+        for(int i=0; i<args.length; i++){
             boolean isPrime = true;
                  if (a[i] == 1)
                      isPrime = false;
@@ -98,18 +114,15 @@ public class Demo {
 
                 System.out.println(a[i] + " ");
         }
+        }
+        catch(ArrayIndexOutOfBoundsException e){ 
+              System.out.println("Please enter a number on the command line");
+        }
     }
-	public static void swapwithoutTemp(int n)//Swapping without using Temp
-	{
-	int a,b;
-	System.out.println(" ");
-	System.out.println("Swapping without use Temp");
-	System.out.println("enter A number");
-	a=s.nextInt();
-	
 
-	System.out.println("enter B number");
-	b=s.nextInt();
+	public static void swapwithoutTemp(int a, int b)//Swapping without using Temp
+	{
+	System.out.println("Swapping without use Temp");
 	
 	System.out.println("before swapping is" +a+" "+b);
 	a=a+b;
@@ -118,17 +131,10 @@ public class Demo {
 	System.out.println("after swapping is" +a+" "+b);
 
 	}
-	public static void swapwithTemp(int n)//Swapping With using Temp
+	public static void swapwithTemp(int a, int b)//Swapping With using Temp
 	{
-		int a,b,temp;
-		System.out.println(" ");
+		int temp;
 		System.out.println("Swapping with using Temp");
-		System.out.println("enter A number");
-		a=s.nextInt();
-		
-
-		System.out.println("enter B number");
-		b=s.nextInt();
 		
 		System.out.println("before swapping is"+a+" "+b);
 		temp=a;
@@ -136,6 +142,7 @@ public class Demo {
 		b=temp;
 		System.out.println("after swapping is"+a+" "+b);
 	}
+	
 	public static void reverseNumber(int n)//Reverse given number
 	{
 		int rem,sum=0;
@@ -150,28 +157,15 @@ public class Demo {
 		}
 		System.out.println("reverse number is"+sum);
 	}
-	public static void reverseString(String s)//reverse given string
+	public static void reverseString(String input)//reverse given string
 	{
-		String input="";
-        System.out.println("Enter the input string");
-        try
-        {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            input = br.readLine();
-            char[] try1= input.toCharArray();
-            for (int i=try1.length-1;i>=0;i--)
-            System.out.print(try1[i]);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }	
+        char[] try1= input.toCharArray();
+		for (int i=try1.length-1;i>=0;i--)
+		System.out.print(try1[i]);	
 	}
 	public static void palindromeNumber(int n)//checking given number is palindrome or not
 	{
 	int rem,sum=0,temp;
-	System.out.println("");
-	System.out.println("enter a number for palindrome");
-	n=s.nextInt();
 	temp=n;
 	while(n>0)
 	{
@@ -189,33 +183,22 @@ public class Demo {
 		System.out.println("not palindrome");
 	}
 	}
-	public static void palindromeString(String s) //checking given string is palindrome or not
+	public static void palindromeString(String str) //checking given string is palindrome or not
 	{
-		try
-        {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("\nEnter a String : ");
-        String str = br.readLine();
-        String rev = "";
+		String rev = "";
         int n = str.length();
         for(int i=n-1 ; i>=0 ; i--)
         {
             rev = rev + str.charAt(i);
         }
         if(str.equals(rev))
-            System.out.println("\nGiven string is a palindrome");
+            System.out.println("Given string is a palindrome");
         else
-            System.out.println("\nGiven string is not a palindrome");
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }		       
-  }
-	public static void printFirstfibonacci(int n)
+            System.out.println("Given string is not a palindrome");		       
+      }
+	public static void printFirstfibonacci(int n)// print Fibonacci frist n value
 		{
 	        int  a = 0, b = 0, c = 1;
-	        System.out.print("Enter value of n:");
-	        n = s.nextInt();
 	        System.out.print("Fibonacci Series:");
 	        for(int i = 1; i <= n; i++)
 	        {
@@ -225,4 +208,5 @@ public class Demo {
 	            System.out.print(a+" ");
 	        }
 	}
+	
 }
