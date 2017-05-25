@@ -1,8 +1,8 @@
 package com;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Demo {
@@ -23,7 +23,8 @@ public class Demo {
 	      }
 	    } 
 	   }
-	public static void printnthPrimes(int max){
+	public static void printnthPrimes(int max)// print nth prime number
+	{
 		
 	    int num, count, i;
 	    num=1;
@@ -208,5 +209,84 @@ public class Demo {
 	            System.out.print(a+" ");
 	        }
 	}
+	public static int fibrec(int n)// print Fibonacci nth value
+	{
+		
+		 if(n==1)
+	        {   
+	            return 0;
+	        }
+	        if(n==2)
+	        {
+	            return 1;
+	        }
+	        return fibrec(n-1)+fibrec(n-2);
+	        
 	
+}
+
+
+public static void contains(String str, String findStr) {
+	int lastIndex = 0;
+	int count = 0;
+
+	while(lastIndex != -1){
+
+	    lastIndex = str.indexOf(findStr,lastIndex);
+
+	    if(lastIndex != -1){
+	        count ++;
+	        lastIndex += findStr.length();
+	    }
+	}
+	System.out.println(count);
+}
+public static void quadraticEquation(int a, int b, int c) 
+{
+  double root1, root2, d;
+  
+  System.out.println("Given quadratic equation:"+a+"x^2 + "+b+"x + "+c);
+  d = b * b - 4 * a * c;
+  if(d > 0)
+  {
+      System.out.println("Roots are real and unequal");
+      root1 = ( - b + Math.sqrt(d))/(2*a);
+      root2 = (-b - Math.sqrt(d))/(2*a);
+      System.out.println("First root is:"+root1);
+      System.out.println("Second root is:"+root2);
+  }
+  else if(d == 0)
+  {
+      System.out.println("Roots are real and equal");
+      root1 = (-b+Math.sqrt(d))/(2*a);
+      System.out.println("Root:"+root1);
+  }
+  else
+  {
+      System.out.println("Roots are imaginary");
+  }
+}
+public static void replacewithFilename(String filename) {
+
+String search = "subbu";
+String replace = "subha";
+
+try{
+    FileReader fr = new FileReader(filename);
+    String s;
+    String totalStr = "";
+    try (BufferedReader br = new BufferedReader(fr)) {
+
+        while ((s = br.readLine()) != null) {
+            totalStr += s;
+        }
+        totalStr = totalStr.replaceAll(search, replace);
+        FileWriter fw = new FileWriter(filename);
+    fw.write(totalStr);
+    fw.close();
+    }
+}catch(Exception e){
+    e.printStackTrace();
+}
+}
 }
