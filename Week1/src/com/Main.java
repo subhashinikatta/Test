@@ -3,15 +3,7 @@ package com;
 
 public class Main {
 
-	public static boolean numberFormat(String args[]){
-		try{
-			Integer.parseInt(args[0]);
-		}catch(Exception e){
-			System.out.println("Number Format Exception");
-		}
-		return false;
-	}
-	
+		
 	public static void main(String args[])
 	{
 		if( args.length == 0 ) System.exit(0);
@@ -40,6 +32,7 @@ public class Main {
 	        Demo.quadraticEquation(Integer.parseInt(args[0]),Integer.parseInt(args[1]),Integer.parseInt(args[2]));
 	        Demo.evenOddPrime(args);
 	        System.out.println(Demo.replaceString(args[0],args[1],args[2]));
+	        Demo.modifyFile(args[0],args[1],args[2]);
 		} 
 		
 	}
