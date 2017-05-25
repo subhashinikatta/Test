@@ -129,59 +129,70 @@ public class Demo {
 		b=temp;
 		System.out.println("after swapping is"+a+" "+b);
 	}
+	public static boolean reverse( String input ) {
+	    try {
+	      int n = Integer.parseInt(input  );
+	        int rem,sum=0;
+			System.out.println("enter a number to reverse");
+			
+			while(n>0)
+			{
+				rem=n%10;
+				sum=(sum*10)+rem;
+				n=n/10;
+			}
+			System.out.println("reverse number is"+sum);
+	        return true;
+	    }
+	    catch( Exception e ) {
+
+	        char[] try1= input.toCharArray();
+			for (int i=try1.length-1;i>=0;i--)
+			System.out.print(try1[i]);
+			
+	        return false;
+	    }
+	}
 	
-	public static void reverseNumber(int n)//Reverse given number
+	public static boolean palindrome( String input )
 	{
-		int rem,sum=0;
-		System.out.println("enter a number to reverse");
-		
-		while(n>0)
-		{
-			rem=n%10;
-			sum=(sum*10)+rem;
-			n=n/10;
+		try {
+		      int n = Integer.parseInt( input );
+		      int rem,sum=0,temp;
+		  	temp=n;
+		  	while(n>0)
+		  	{
+		  		rem=n%10;
+		  		sum=(sum*10)+rem;
+		  		n=n/10;
+		  	}
+		  	
+		  	if(temp==sum)
+		  	{
+		  		System.out.println("palindrome");
+		  	}
+		  	else
+		  	{
+		  		System.out.println("not palindrome");
+		  	}
+		  	 return true;
 		}
-		System.out.println("reverse number is"+sum);
+		  	 catch( Exception e ) {
+		  		String rev = "";
+		        int n = input.length();
+		        for(int i=n-1 ; i>=0 ; i--)
+		        {
+		            rev = rev + input.charAt(i);
+		        }
+		        if(input.equals(rev))
+		            System.out.println("Given string is a palindrome");
+		        else
+		            System.out.println("Given string is not a palindrome");	
+		        return false;
+		  	 }
+		
 	}
-	public static void reverseString(String input)//reverse given string
-	{
-        char[] try1= input.toCharArray();
-		for (int i=try1.length-1;i>=0;i--)
-		System.out.print(try1[i]);	
-	}
-	public static void palindromeNumber(int n)//checking given number is palindrome or not
-	{
-	int rem,sum=0,temp;
-	temp=n;
-	while(n>0)
-	{
-		rem=n%10;
-		sum=(sum*10)+rem;
-		n=n/10;
-	}
-	
-	if(temp==sum)
-	{
-		System.out.println("palindrome");
-	}
-	else
-	{
-		System.out.println("not palindrome");
-	}
-	}
-	public static void palindromeString(String str) //checking given string is palindrome or not
-	{
-		String rev = "";
-        int n = str.length();
-        for(int i=n-1 ; i>=0 ; i--)
-        {
-            rev = rev + str.charAt(i);
-        }
-        if(str.equals(rev))
-            System.out.println("Given string is a palindrome");
-        else
-            System.out.println("Given string is not a palindrome");		       
-      }
+
 	public static void printFirstfibonacci(int n)// print Fibonacci frist n value
 		{
 	        int  a = 0, b = 0, c = 1;
