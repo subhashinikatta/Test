@@ -1,3 +1,4 @@
+
 package com;
 
 import java.io.BufferedReader;
@@ -5,26 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
+
 
 public class Demo {
-	private static Scanner s;
-	public static void printPrimes(int max) //print prime numbers
-	{
-	    int counter = 0;
-      System.out.println("prime numbers are:");   
-	    for (int i = 2; i <= max; i++) {
-	     counter = 0;
-	        for (int n = 2; n < i; n++) {
-	           if (i % n == 0) {
-	            counter++;
-	          }
-	         }
-	      if (counter == 0) {
-	        System.out.println(i);
-	      }
-	    } 
-	   }
 	public static void printnthPrimes(int max)// print nth prime number
 	{
 		
@@ -150,7 +134,6 @@ public class Demo {
 	{
 		int rem,sum=0;
 		System.out.println("enter a number to reverse");
-		n=s.nextInt();
 		
 		while(n>0)
 		{
@@ -269,8 +252,8 @@ public static void quadraticEquation(int a, int b, int c)//Quadratic Equation
       System.out.println("Roots are imaginary");
   }
 }
-static String replaceString(String original, String toReplace, String replacedWith)// to replace string from a string
-{
+static String replaceString(String original, String toReplace,
+        String replacedWith) {
     for(;;) {
         int i = original.indexOf(toReplace);
         if (i == -1) {
@@ -280,7 +263,7 @@ static String replaceString(String original, String toReplace, String replacedWi
     }
     return original;
 }
-static void modifyFile(String filename, String oldString, String newString)// to replace string from a file
+static void modifyFile(String filename, String oldString, String newString)
 {
     File fileToBeModified = new File(filename);
      
@@ -336,5 +319,4 @@ static void modifyFile(String filename, String oldString, String newString)// to
     }
 }
 }
-
 

@@ -3,15 +3,14 @@ package com;
 
 public class Main {
 
-		
+	
 	public static void main(String args[])
 	{
 		if( args.length == 0 ) System.exit(0);
 		if(args.length == 1){
-			Demo.printPrimes(Integer.parseInt(args[0]));
 			Demo.printnthPrimes(Integer.parseInt(args[0]));
 			Demo.printFirstPrime(Integer.parseInt(args[0]));
-			Demo.reverseNumber(Integer.parseInt(args[0]));
+		    Demo.reverseNumber(Integer.parseInt(args[0]));
 			Demo.palindromeNumber(Integer.parseInt(args[0]));
 			Demo.printFirstfibonacci(Integer.parseInt(args[0]));
 		    System.out.println("th value in fibonacci series is : "+Demo.fibrec(Integer.parseInt(args[0])));
