@@ -1,8 +1,10 @@
 package com;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Demo {
@@ -226,7 +228,8 @@ public class Demo {
 }
 
 
-public static void contains(String str, String findStr) {
+public static void contains(String str, String findStr)//String With in string
+{
 	int lastIndex = 0;
 	int count = 0;
 
@@ -241,7 +244,7 @@ public static void contains(String str, String findStr) {
 	}
 	System.out.println(count);
 }
-public static void quadraticEquation(int a, int b, int c) 
+public static void quadraticEquation(int a, int b, int c)//Quadratic Equation 
 {
   double root1, root2, d;
   
@@ -266,27 +269,17 @@ public static void quadraticEquation(int a, int b, int c)
       System.out.println("Roots are imaginary");
   }
 }
-public static void replacewithFilename(String filename) {
-
-String search = "subbu";
-String replace = "subha";
-
-try{
-    FileReader fr = new FileReader(filename);
-    String s;
-    String totalStr = "";
-    try (BufferedReader br = new BufferedReader(fr)) {
-
-        while ((s = br.readLine()) != null) {
-            totalStr += s;
+static String replaceString(String original, String toReplace, String replacedWith)// to replace string from a string
+{
+    for(;;) {
+        int i = original.indexOf(toReplace);
+        if (i == -1) {
+            break;
         }
-        totalStr = totalStr.replaceAll(search, replace);
-        FileWriter fw = new FileWriter(filename);
-    fw.write(totalStr);
-    fw.close();
+        original = original.substring(0, i) + replacedWith + original.substring(i + toReplace.length());
     }
-}catch(Exception e){
-    e.printStackTrace();
+    return original;
 }
 }
-}
+
+
