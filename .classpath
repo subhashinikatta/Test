@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="CalculatorWeb/src"/>
+	<classpathentry kind="src" path="Commands/bin/head"/>
+	<classpathentry excluding="head/" kind="src" path="Commands/src"/>
+	<classpathentry kind="src" path="Commands/src/head"/>
+	<classpathentry kind="src" path="CustomerApplication/src"/>
+	<classpathentry kind="src" path="HashMap/src"/>
+	<classpathentry kind="src" path="ListImpl/src"/>
+	<classpathentry kind="src" path="MapImpl/src"/>
+	<classpathentry kind="src" path="ObjectCount/src"/>
+	<classpathentry kind="src" path="StackImpl/src"/>
+	<classpathentry kind="src" path="UserRegistartion/src"/>
+	<classpathentry kind="src" path="Week1/src"/>
+	<classpathentry kind="src" path="Week2/src"/>
+	<classpathentry kind="lib" path="UserRegistartion/WebContent/WEB-INF/lib/gson-2.3-sources.jar"/>
+	<classpathentry kind="lib" path="UserRegistartion/WebContent/WEB-INF/lib/jersey-bundle-1.19.1.jar"/>
+	<classpathentry kind="lib" path="UserRegistartion/WebContent/WEB-INF/lib/mysql-connector-java-5.1.41-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="CalculatorWeb/build/classes"/>
+</classpath>
