@@ -1,0 +1,1 @@
+{"type":"object","properties":{"code":{"format":"int32","type":"integer"},"type":{"type":"string"},"message":{"type":"string"}}}

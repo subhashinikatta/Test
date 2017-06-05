@@ -1,0 +1,1 @@
+{"xml":{"name":"Category"},"type":"object","properties":{"name":{"type":"string"},"id":{"format":"int64","type":"integer"}}}
