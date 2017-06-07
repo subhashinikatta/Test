@@ -175,7 +175,7 @@ package com;
  	            System.out.print(a+" "); 
  	        } 
  	    }catch(Exception e){
- 	    	System.out.println("Error");
+ 	    	e.printStackTrace();
  	    }
  	} 
  /* print Fibonacci nth value */
@@ -196,25 +196,57 @@ package com;
  	  }catch(Exception e){
 	    	System.out.println("Error");
 	    }
- }  
+ } 
+ 	/*Swapping two numbers */
+ 	
+ 	 public static void Swap(int a, int b) {
+ 		 try{
+ 			Test ob = new Test(2,3);
+
+ 	        System.out.println("Before swapping");
+
+ 	        System.out.println("a = "+ob.a+" b = "+ob.b);
+
+ 	        ob.swap(ob);
+
+ 	        System.out.println("After Swapping");
+
+ 	        System.out.println("a = "+ob.a+" b ="+ob.b);                 
+
+ 		 }catch(Exception e){
+ 	    	e.printStackTrace();
+ 	    }
+ 	 }
+ 	 
  	/*String With in string*/ 
- public static void contains(String str, String findStr)
- { 
-	 try{
- 	int lastIndex = 0; 
- 	int count = 0; 
- 
- 	while(lastIndex != -1){ 
- 	    lastIndex = str.indexOf(findStr,lastIndex); 
- 	    if(lastIndex != -1){ 
- 	        count ++; 
- 	        lastIndex += findStr.length(); 
- 	    } 
- 	} 
- 	System.out.println(count); 
- }catch(Exception e){
-	  	System.out.println("Error");
-	  }
+
+		 public static int myIndexOf(char[] str, char[] substr) {
+			 try{
+			    int len = str.length;
+			    int sublen = substr.length;
+			    int count = 0;
+			            if (sublen > len) {
+			                return -1;
+			            }
+			    for (int i = 0; i < len - sublen + 1; i++) {
+			        for (int j = 0; j < sublen; j++) {
+			            if (str[j+i] == substr[j]) {
+			                count++;
+			                if (count == sublen) {
+			                    return i;
+			                }
+			            } else {
+			                count = 0;
+			                break;
+			            }
+			        }
+			    }
+			    
+			} 
+			 catch(Exception e){
+		 	    	e.printStackTrace();
+		 	    }
+			 return -1;
  }
 /*Quadratic Equation */ 
  public static void quadraticEquation(int a, int b, int c,int x)
@@ -223,81 +255,41 @@ package com;
 		m=a*(x*x)+b*x+c;
 		System.out.println("Equation solving Solution is"+m);
  }catch(Exception e){
-  	System.out.println("Error");
+  	e.printStackTrace();
   }
  } 
- static void replaceMethod(String original, String toReplace,
-	        String replacedWith) {
-	 try{
-	    for(;;) {
-	        int i = original.indexOf(toReplace);
-	        if (i == -1) {
-	            break;
-	        }
-	        original = original.substring(0, i) + replacedWith + original.substring(i , toReplace.length());
-	    }
-	    System.out.println(original);
-	 }catch(Exception e){
-		  	System.out.println("Error");
-		  }
+ 
+ /*replace string from a file / String input.*/
+ 
+ static void replace(String oldstr,String newstr,String file){
+		try
+		{
+			FileReader fr = new FileReader( file );
+			BufferedReader reader = new BufferedReader( fr );
+
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null)
+			{
+				oldtext += line + "\r\n";
+			}
+			reader.close();
+			// replace a word in a file
+			int a=0,b=0;
+			String result="";
+			while ((a=oldtext.indexOf(oldstr, b))>-1) {
+				result+=oldtext.substring(b,a);
+				result+=newstr;
+				b=a+oldstr.length();
+			}
+			result+=oldtext.substring(b);
+			String newtext=result;
+			oldtext=oldtext+"\n";
+
+			FileWriter writer = new FileWriter(file);
+			writer.write(newtext);writer.close();
+		}
+		catch(Exception e){
+ 	    	e.printStackTrace();
+ 	    }
 	}
- static void modifyFile(String filename, String oldString, String newString) // replace string fron a file
- { 
-     File fileToBeModified = new File(filename); 
-       
-     String oldContent = ""; 
-       
-     BufferedReader reader = null; 
-       
-     FileWriter writer = null; 
-       
-     try 
-     { 
-         reader = new BufferedReader(new FileReader(fileToBeModified)); 
-           
-         //Reading all the lines of input text file into oldContent 
-           
-         String line = reader.readLine(); 
-           
-         while (line != null)  
-         { 
-
-             oldContent = oldContent + line + System.lineSeparator(); 
-               
-             line = reader.readLine(); 
-         } 
-           
-         //Replacing oldString with newString in the oldContent 
-           
-         String newContent = oldContent.replaceAll(oldString, newString); 
-           
-         //Rewriting the input text file with newContent 
-           
-         writer = new FileWriter(fileToBeModified); 
-           
-         writer.write(newContent); 
-     } 
-     catch (IOException e) 
-     { 
-         e.printStackTrace(); 
-     } 
-     finally 
-     { 
-         try 
-         { 
-             //Closing the resources 
-               
-             reader.close();                
-             writer.close(); 
-         }  
-         catch (IOException e)  
-         { 
-             e.printStackTrace(); 
-         } 
-     } 
- } 
- } 
- 
- 
- 
-
+}
