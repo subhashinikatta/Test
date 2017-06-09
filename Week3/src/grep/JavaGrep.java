@@ -10,7 +10,7 @@ class JavaGrep
             String searchWord="";
             String fileName="";
             String options="";
-            String optionsAllowed="vnic";//Options allowed in the input
+           String optionsAllowed="vnic";//Options allowed in the input
             if (args.length==2)
             {
                 searchWord=args[0];
@@ -27,7 +27,7 @@ class JavaGrep
                 exit();
             }
              
-             
+            
             if(options.length()>4 )   // length  of options may not be more than 4 chars. 
                 {
                     exit();   
@@ -53,7 +53,7 @@ class JavaGrep
         public static void grep(String options, String exp, String filename) throws IOException
             {
                 int count = 0;
-                int flag=0;
+                //int flag=0;
                 int lineNo=0;
                 int countNM=0;
                 Pattern pattern = null;
@@ -98,7 +98,7 @@ class JavaGrep
                         }
                         //Lines count for both matching  &  not matching 
                         if (options.contains("c"))  
-                        {
+                      {
                             System.out.println("\n Word / Exp : " + exp );
                             System.out.println(count + " line(s) matched.");
                             System.out.println(countNM + " line(s) not matched.");
