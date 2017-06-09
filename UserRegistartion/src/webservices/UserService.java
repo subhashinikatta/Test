@@ -78,7 +78,7 @@ public String register(@FormParam("FirstName") String FirstName,
         @FormParam("confirmpassword") String confirmpassword){
 	
 	 User user = new User(FirstName,LastName,Email,username,password,confirmpassword);
-    /* int result = UserDAOImplementation.addUser(user);*/
+   
 	
 	 userDao.addUser(user);
 	
