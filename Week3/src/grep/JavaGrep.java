@@ -18,7 +18,7 @@ class JavaGrep
             }
             else if (args.length==3)
               {
-                options=args[0];    //options may contain  vnic.   
+                options=args[0];    //options may contain  vnicew.   
                 searchWord=args[1];
                 fileName=args[2];
             }
@@ -28,7 +28,7 @@ class JavaGrep
             }
              
              
-            if(options.length()>4 )   // length  of options may not be more than 4 chars. 
+            if(options.length()>6 )   // length  of options may not be more than 6 chars. 
                 {
                     exit();   
                 }
@@ -89,13 +89,13 @@ class JavaGrep
                              //printing not matching lines
                             if (options.contains("v"))   
                             {
-                                if (options.contains("-n"))  
+                                if (options.contains("n"))  
                                     System.out.println(lineNo + " : " + line);  
                                 else
                                     System.out.println(line); 
                             }
                             }
-                         if(options.contains("-w"))//match only whole words 
+                         if(options.contains("w"))//match only whole words 
                          {
         						if (matcher.find())
         						{

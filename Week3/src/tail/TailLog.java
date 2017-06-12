@@ -8,9 +8,8 @@ import java.util.concurrent.Executors;
  
 public class TailLog implements Runnable {
  
-	private boolean debug = false;
  
-	private int RunEveryNSeconds = 2000;
+	private int RunEveryNSeconds = 10;
 	private long lastKnownPosition = 0;
 	private boolean shouldIRun = true;
 	private File File = null;
@@ -46,23 +45,18 @@ public class TailLog implements Runnable {
 						TailCounter++;
 					}
 					 
-					lastKnownPosition = readWriteFileAccess.getFilePointer();
+					lastKnownPosition = readWriteFileAccess.getFilePointer();//Returns the current offset in this file.
 					readWriteFileAccess.close();
-				} else {
-					if (debug)
-						this.printLine("Hmm.. Couldn't found new line after line # " + TailCounter);
-				}
+				} 
 			}
 		} catch (Exception e) {
 			stopRunning();
 		}
-		if (debug)
-			this.printLine("Exit the program...");
 	}
  
 	public static void main(String args[]) {
  
-		ExecutorService Executor = Executors.newFixedThreadPool(6);
+		ExecutorService Executor = Executors.newFixedThreadPool(6);//create thred pool- number of threads6
  
 		TailLog tailF = new TailLog(args[0],Integer.parseInt( args[1] ),args[2]);
  
@@ -71,7 +65,5 @@ public class TailLog implements Runnable {
 
  
 	}
- 
-	
  
 }
