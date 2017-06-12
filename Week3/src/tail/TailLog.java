@@ -16,7 +16,7 @@ public class TailLog implements Runnable {
 	private File File = null;
 	private static int TailCounter = 0;
  
-	public TailLog(String myFile, int myInterval) {
+	public TailLog(String options, int myInterval,String myFile) {
 		File = new File(myFile);
 		this.RunEveryNSeconds = myInterval;
 	}
@@ -40,10 +40,12 @@ public class TailLog implements Runnable {
 					RandomAccessFile readWriteFileAccess = new RandomAccessFile(File, "rw");
 					readWriteFileAccess.seek(lastKnownPosition);
 					String Line = null;
+				
 					while ((Line = readWriteFileAccess.readLine()) != null) {
 						this.printLine(Line);
 						TailCounter++;
 					}
+					 
 					lastKnownPosition = readWriteFileAccess.getFilePointer();
 					readWriteFileAccess.close();
 				} else {
@@ -58,14 +60,11 @@ public class TailLog implements Runnable {
 			this.printLine("Exit the program...");
 	}
  
-	public static void main(String argv[]) {
+	public static void main(String args[]) {
  
 		ExecutorService Executor = Executors.newFixedThreadPool(6);
  
-		// Replace username with your real value
-		// For windows provide different path like: c:\\user\\subbu.log
-		String filePath = "C:/java/subbu.txt";
-		TailLog tailF = new TailLog(filePath, 100);
+		TailLog tailF = new TailLog(args[0],Integer.parseInt( args[1] ),args[2]);
  
 		// Start running log file tailer on subbu.log file
 		Executor.execute(tailF);
