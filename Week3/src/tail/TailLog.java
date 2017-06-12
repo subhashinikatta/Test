@@ -64,12 +64,12 @@ public class TailLog implements Runnable {
  
 		// Replace username with your real value
 		// For windows provide different path like: c:\\user\\subbu.log
-		String filePath = "C:/Users/kshubhashini/Downloads/subbu.log";
-		TailLog tailF = new TailLog(filePath, 10000);
+		String filePath = "C:/java/subbu.txt";
+		TailLog tailF = new TailLog(filePath, 100);
  
 		// Start running log file tailer on subbu.log file
 		Executor.execute(tailF);
- 
+
  
 	}
  
