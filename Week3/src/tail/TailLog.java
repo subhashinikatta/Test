@@ -60,12 +60,12 @@ public class TailLog implements Runnable {
  
 	public static void main(String argv[]) {
  
-		ExecutorService Executor = Executors.newFixedThreadPool(4);
+		ExecutorService Executor = Executors.newFixedThreadPool(6);
  
 		// Replace username with your real value
-		// For windows provide different path like: c:\\temp\\crunchify.log
+		// For windows provide different path like: c:\\user\\subbu.log
 		String filePath = "C:/Users/kshubhashini/Downloads/subbu.log";
-		TailLog tailF = new TailLog(filePath, 2000);
+		TailLog tailF = new TailLog(filePath, 10000);
  
 		// Start running log file tailer on subbu.log file
 		Executor.execute(tailF);
