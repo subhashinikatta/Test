@@ -89,13 +89,13 @@ class JavaGrep
                              //printing not matching lines
                             if (options.contains("v"))   
                             {
-                                if (options.contains("-n"))  
+                                if (options.contains("n"))  
                                     System.out.println(lineNo + " : " + line);  
                                 else
                                     System.out.println(line); 
                             }
                             }
-                         if(options.contains("-w"))//match only whole words 
+                         if(options.contains("w"))//match only whole words 
                          {
         						if (matcher.find())
         						{
