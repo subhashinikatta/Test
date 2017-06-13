@@ -16,8 +16,13 @@ public class TailLog implements Runnable {
 	private static int TailCounter = 0;
  
 	public TailLog(String options, int myInterval,String myFile) {
+		if(options.contains("-f")){
 		File = new File(myFile);
 		this.RunEveryNSeconds = myInterval;
+		}else
+		{
+			System.out.println("GiveProper Syntax");
+		}
 	}
  
 	private void printLine(String message) {
@@ -39,7 +44,7 @@ public class TailLog implements Runnable {
 					RandomAccessFile readWriteFileAccess = new RandomAccessFile(File, "rw");
 					readWriteFileAccess.seek(lastKnownPosition);
 					String Line = null;
-				
+					
 					while ((Line = readWriteFileAccess.readLine()) != null) {
 						this.printLine(Line);
 						TailCounter++;
