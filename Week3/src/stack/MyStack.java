@@ -4,12 +4,12 @@ import java.util.NoSuchElementException;
 
 
 
-public class arrayStack
+public class MyStack
 {
     protected int arr[];
     protected int top, size, len;
     /*  Constructor for arrayStack */
-    public arrayStack(int n)
+    public MyStack(int n)
     {
         size = n;
         len = 0;

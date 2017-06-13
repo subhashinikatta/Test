@@ -56,8 +56,9 @@ public class TailLog implements Runnable {
  
 	public static void main(String args[]) {
  
-		ExecutorService Executor = Executors.newFixedThreadPool(6);//create thred pool- number of threads6
- 
+
+		ExecutorService Executor = Executors.newSingleThreadExecutor(); //create thread pool 
+		// Executor that uses a single worker thread operating off an unbounded queue. 
 		TailLog tailF = new TailLog(args[0],Integer.parseInt( args[1] ),args[2]);
  
 		// Start running log file tailer on subbu.log file
