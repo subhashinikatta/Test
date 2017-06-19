@@ -2,6 +2,7 @@ package com;
 
 class MyThread2 extends Thread
 {  
+
 	ThreadFileWriter t;  
 	MyThread2(ThreadFileWriter t)
 	{  
@@ -9,6 +10,6 @@ class MyThread2 extends Thread
 	}  
 
 public void run(){  
-t.fileWrite();  
+ThreadFileWriter.fileWrite("subbu2.txt","how are u ?");  
 }  
 }  
