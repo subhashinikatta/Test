@@ -1,5 +1,4 @@
 package client;
-import java.net.HttpURLConnection;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

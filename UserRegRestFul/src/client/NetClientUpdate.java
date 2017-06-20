@@ -19,7 +19,7 @@ public class NetClientUpdate {
 					"http://localhost:8024/UserRegRestFul/rest/user/register");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
-			conn.setRequestMethod("POST");
+			conn.setRequestMethod("PUT");
 			conn.setRequestProperty("Content-Type", "application/json");
 
 			String input = "{\"FirstName\":\"subhashini\",\"LastName\":\"katta\",\"Email\":\"su@hcl.com\",\"username\":\"subha\",\"password\":\"subha\",\"confirmpassword\":\"subha\"}";

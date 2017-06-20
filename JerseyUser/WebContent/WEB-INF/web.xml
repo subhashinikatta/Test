@@ -2,33 +2,23 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <display-name>UserReg</display-name>
  
-<welcome-file-list>
-
-<welcome-file>NewFile.jsp</welcome-file>
-<welcome-file>reg1.jsp</welcome-file>
-<welcome-file>upadte.jsp</welcome-file>
-<welcome-file>reg.jsp</welcome-file>
-<welcome-file>delete.jsp</welcome-file>
-</welcome-file-list>
-
-
 <servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>webservice</param-value>
+		</init-param>
+		<init-param>
+			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 
-<servlet-name>ServletAdaptor</servlet-name>
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
 
-<servlet-class>com.sun.jersey.server.impl.container.servlet.ServletAdaptor</servlet-class>
-
-
-<load-on-startup>1</load-on-startup>
-
-</servlet>
-
-
-<servlet-mapping>
-
-<servlet-name>ServletAdaptor</servlet-name>
-
-<url-pattern>/rest/*</url-pattern>
-
-</servlet-mapping>
 </web-app>

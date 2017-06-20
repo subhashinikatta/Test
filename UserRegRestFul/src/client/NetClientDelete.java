@@ -21,7 +21,7 @@ public class NetClientDelete {
 						"http://localhost:8024/UserRegRestFul/rest/user/delete");
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setDoOutput(true);
-				conn.setRequestMethod("POST");
+				conn.setRequestMethod("DELETE");
 				conn.setRequestProperty("Content-Type", "application/json");
 				String input = "{\"Email\":\"Subbu@ghcl.com\"}";
 			
