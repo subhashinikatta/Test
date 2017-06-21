@@ -69,7 +69,6 @@ public class TailLog implements Runnable {
 		// Start running log file tailer on subbu.log file
 		Executor.execute(tailF);
 
- 
 	}
  
 }

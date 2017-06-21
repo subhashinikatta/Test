@@ -10,7 +10,7 @@ class JavaGrep
             String searchWord="";
             String fileName="";
             String options="";
-            String optionsAllowed="vnicwe";//Options allowed in the input
+            String optionsAllowed="-i –e –v –w –c -n";//Options allowed in the input
             if (args.length==2)
             {
                 searchWord=args[0];
@@ -59,7 +59,7 @@ class JavaGrep
                 // open the file
                 BufferedReader brdr = new BufferedReader(new FileReader(filename));
                 String line;
-                if(options.contains("i"))  flag=2;// for case insensitive
+                if(options.contains("-i"))  flag=2;// for case insensitive
                     Pattern pattern=null;
                     // reading  each line
                     while( (line = brdr.readLine( )) != null)
@@ -76,9 +76,9 @@ class JavaGrep
                           {
                              count++;    //counting matching lines
                             //printing only matching lines
-                            if (!options.contains("v"))
+                            if (!options.contains("-v"))
                             {
-                                if (options.contains("n")) 
+                                if (options.contains("-n")) 
                                     System.out.println(lineNo + " : " + line);  
                                 else System.out.println(line);
                             }
@@ -87,15 +87,15 @@ class JavaGrep
                             {
                              countNM++;  // counting not matching lines
                              //printing not matching lines
-                            if (options.contains("v"))   
+                            if (options.contains("-v"))   
                             {
-                                if (options.contains("n"))  
+                                if (options.contains("-n"))  
                                     System.out.println(lineNo + " : " + line);  
                                 else
                                     System.out.println(line); 
                             }
                             }
-                         if(options.contains("w"))//match only whole words 
+                         if(options.contains("-w"))//match only whole words 
                          {
         						if (matcher.find())
         						{
@@ -105,7 +105,7 @@ class JavaGrep
         							}
         						}
                             }
-                         if(options.contains("e"))//use regex PATTERN for matching
+                         if(options.contains("-e"))//use regex PATTERN for matching
                          {
  							if (matcher.lookingAt()) {
  								if (filename != null) {
@@ -116,7 +116,7 @@ class JavaGrep
  						}
                     }
                         //Lines count for both matching  &  not matching 
-                        if (options.contains("c"))  
+                        if (options.contains("-c"))  
                         {
                             System.out.println("\n Word / Exp : " + exp );
                             System.out.println(count + " line(s) matched.");
@@ -130,7 +130,7 @@ class JavaGrep
         public static void exit()
         {
                 System.out.println("Syntax : java JavaGrep [options] regular_expression/word file_name "  );
-                System.out.println("Options Allowed : i or n or c or v or e or w  or any combinations "  );
+                System.out.println("Options Allowed : -i or -n or -c or -v or -e or -w  or any combinations "  );
                 System.exit(0);
         }
 }
