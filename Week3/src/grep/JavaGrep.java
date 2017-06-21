@@ -1,5 +1,6 @@
 package grep;
 import java.io.*;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -9,57 +10,55 @@ class JavaGrep
         {
             String searchWord="";
             String fileName="";
-            String options="";
-            String optionsAllowed="-i –e –v –w –c -n";//Options allowed in the input
+            String[] options=new String[4];
             if (args.length==2)
             {
                 searchWord=args[0];
                 fileName=args[1];
             }
-            else if (args.length==3)
-              {
-                options=args[0];    //options may contain  vnicew.   
+            if (args.length==3)
+            {
+            	for(int i=0;i<1;i++){
+            		options[i]=args[i];//stores option in an array
+            	}
                 searchWord=args[1];
                 fileName=args[2];
+            }
+            else if (args.length>3)
+              {
+            	for(int i=0;i<2;i++){//options may contain  vnicew. 
+                      options[i]=args[i];
+                
+            	}
+                searchWord=args[2];
+                fileName=args[3];
             }
             else
             {
                 exit();
             }
              
-             
-            if(options.length()>6 )   // length  of options may not be more than 6 chars. 
-                {
-                    exit();   
-                }
-             
-                char OA[]=options.toCharArray(); //Options converted to char array
-                 
-            for (int i=0 ; i<OA.length;i++)     
-                if( optionsAllowed.indexOf(OA[i])==-1)  //if options contains other than vnci, it exits
-                { 
-                    System.out.println("Invalid options");
-                    exit();
-                }
-                     
+            
              
             try
-            {
+           {
                 grep(options, searchWord, fileName);  // calling grep method to search lines
             }
-            catch(IOException io)  { System.out.println("IO Error");  }
+           catch(IOException io){  }
         }
 // grep method starts
-        public static void grep(String options, String exp, String filename) throws IOException
+        public static void grep(String options[], String exp, String filename) throws IOException
             {
                 int count = 0;
                 int flag=0;
                 int lineNo=0;
                 int countNM=0;
+                for(int i=0;i<options.length;i++){
+                String str=options[i].toString();// convert array to string
                 // open the file
                 BufferedReader brdr = new BufferedReader(new FileReader(filename));
                 String line;
-                if(options.contains("-i"))  flag=2;// for case insensitive
+                if(str.contains("-i"))  flag=2;// for case insensitive
                     Pattern pattern=null;
                     // reading  each line
                     while( (line = brdr.readLine( )) != null)
@@ -76,9 +75,9 @@ class JavaGrep
                           {
                              count++;    //counting matching lines
                             //printing only matching lines
-                            if (!options.contains("-v"))
+                            if (!str.contains("-v"))
                             {
-                                if (options.contains("-n")) 
+                                if (str.contains("-n")) 
                                     System.out.println(lineNo + " : " + line);  
                                 else System.out.println(line);
                             }
@@ -87,15 +86,15 @@ class JavaGrep
                             {
                              countNM++;  // counting not matching lines
                              //printing not matching lines
-                            if (options.contains("-v"))   
+                            if (str.contains("-v"))   
                             {
-                                if (options.contains("-n"))  
+                                if (str.contains("-n"))  
                                     System.out.println(lineNo + " : " + line);  
                                 else
                                     System.out.println(line); 
                             }
                             }
-                         if(options.contains("-w"))//match only whole words 
+                         if(str.contains("-w"))//match only whole words 
                          {
         						if (matcher.find())
         						{
@@ -105,7 +104,7 @@ class JavaGrep
         							}
         						}
                             }
-                         if(options.contains("-e"))//use regex PATTERN for matching
+                         if(str.contains("-e"))//use regex PATTERN for matching
                          {
  							if (matcher.lookingAt()) {
  								if (filename != null) {
@@ -116,16 +115,17 @@ class JavaGrep
  						}
                     }
                         //Lines count for both matching  &  not matching 
-                        if (options.contains("-c"))  
+                        if (str.contains("-c"))  
                         {
                             System.out.println("\n Word / Exp : " + exp );
                             System.out.println(count + " line(s) matched.");
                             System.out.println(countNM + " line(s) not matched.");
                         }
                        
-                          
+                 
                         brdr.close( );
                 }
+            }
  
         public static void exit()
         {
